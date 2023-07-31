@@ -19,9 +19,7 @@
 
     <section class="content">
 
-        @if (session('message'))
-            <h5 class="alert alert-success mb-2">{{ session('message') }}</h5>
-        @endif
+        @include('inc.alert')
 
         <div class="card card-dark">
             <div class="card-header border-transparent">
@@ -36,7 +34,7 @@
                     </button>
                 </div>
             </div>
-            <form action="" method="POST">
+            <form action="{{ url('dashboard/admin/pendaftaran-diklat') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="card-body p-2">
@@ -87,7 +85,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="perihal" class="col-sm-3 col-form-label">No Surat Masuk</label>
+                                        <label for="perihal" class="col-sm-3 col-form-label">Perihal</label>
                                         <div class="col-sm-9">
                                             <div class="input-group">
                                                 <input type="text"
@@ -291,6 +289,36 @@
                                                     Praktikan --</option>
                                             </select>
                                             @error('jenis_praktikan_id')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="jumlah_peserta" class="col-sm-3 col-form-label">Jumlah Peserta</label>
+                                        <div class="col-sm-9">
+                                            <input type="number"
+                                                class="form-control @error('jumlah_peserta') is-invalid @enderror"
+                                                id="jumlah_peserta" name="jumlah_peserta" placeholder="Jumlah Peserta"
+                                                value="{{ old('jumlah_peserta') }}">
+                                            @error('jumlah_peserta')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="opsi_honorarium" class="col-sm-3 col-form-label">Biaya Lainnya</label>
+                                        <div class="col-sm-9">
+                                            <select name="opsi_honorarium" id="opsi_honorarium"
+                                                class="form-control @error('opsi_honorarium') is-invalid @enderror">
+                                                <option value="">-- Pilih biaya lainnya --</option>
+                                                <option value="ya">Dengan biaya honorarium CI</option>
+                                                <option value="tidak">Tidak dengan biaya honorarium CI</option>
+                                            </select>
+                                            @error('opsi_honorarium')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

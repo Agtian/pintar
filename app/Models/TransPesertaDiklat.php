@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TransPesertaDiklat extends Model
 {
     use HasFactory;
+
+    protected $table = 't_peserta_diklat';
+
+    protected $guarded = [];
 }

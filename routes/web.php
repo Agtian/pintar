@@ -143,7 +143,7 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::put('/daftar-peserta/{daftarpeserta}', 'update');
         Route::get('/daftar-peserta/{daftarpeserta}/delete', 'destroy');
     });
-    
+
     Route::controller(PembayaranDiklatController::class)->group(function () {
         Route::get('/pembayaran-diklat', 'index');
         Route::get('/pembayaran-diklat/create', 'create');
