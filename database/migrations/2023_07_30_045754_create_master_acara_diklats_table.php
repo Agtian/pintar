@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->bigInteger('biaya_per_orang');
+            $table->integer('role_max_peserta');
             $table->string('brosur');
             $table->text('catatan');
             $table->tinyInteger('status')->default('0')->comment('0=hidden,1=aktif,2=tidak_aktif');
