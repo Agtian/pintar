@@ -7,6 +7,7 @@ use App\Http\Controllers\Diklat\DaftarPesertaController;
 use App\Http\Controllers\Diklat\PendaftaranDiklatController;
 use App\Http\Controllers\Diklat\SuratBalasanController;
 use App\Http\Controllers\HomeDashboard\HomeDashboard;
+use App\Http\Controllers\KelolaPelatihan\DaftarPelatihanController;
 use App\Http\Controllers\Master\HonorariumDiklat\HonorariumDiklatController;
 use App\Http\Controllers\Master\JenisKegiatan\JenisKegiatanController;
 use App\Http\Controllers\Master\JenisPraktikan\JenisPraktikanController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Master\Pegawai\PegawaiController;
 use App\Http\Controllers\Master\SatuanKegiatan\SatuanKegiatanController;
 use App\Http\Controllers\Master\TarifDiklat\TarifDiklatController;
 use App\Http\Controllers\Master\UnitKerja\UnitKerjaController;
+use App\Http\Controllers\Pelatihan\PendaftaranPelatihanController;
 use App\Http\Controllers\SystemController\DropdownController;
 use Illuminate\Support\Facades\Route;
 
@@ -160,5 +162,23 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/rekap-pendapatan/{rekappendapatan}/edit', 'edit');
         Route::put('/rekap-pendapatan/{rekappendapatan}', 'update');
         Route::get('/rekap-pendapatan/{rekappendapatan}/delete', 'destroy');
+    });
+
+    Route::controller(PendaftaranPelatihanController::class)->group(function () {
+        Route::get('/pendaftaran-pelatihan', 'index');
+        Route::get('/pendaftaran-pelatihan/create', 'create');
+        Route::post('/pendaftaran-pelatihan', 'store');
+        Route::get('/pendaftaran-pelatihan/{pendaftaranpelatihan}/edit', 'edit');
+        Route::put('/pendaftaran-pelatihan/{pendaftaranpelatihan}', 'update');
+        Route::get('/pendaftaran-pelatihan/{pendaftaranpelatihan}/delete', 'destroy');
+    });
+
+    Route::controller(DaftarPelatihanController::class)->group(function () {
+        Route::get('/daftar-pelatihan', 'index');
+        Route::get('/daftar-pelatihan/create', 'create');
+        Route::post('/daftar-pelatihan', 'store');
+        Route::get('/daftar-pelatihan/{daftarpelatihan}/edit', 'edit');
+        Route::put('/daftar-pelatihan/{daftarpelatihan}', 'update');
+        Route::get('/daftar-pelatihan/{daftarpelatihan}/delete', 'destroy');
     });
 });

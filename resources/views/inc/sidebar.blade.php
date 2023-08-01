@@ -57,14 +57,25 @@
                     </a>
                 </li>
 
-                <li class="nav-header">BILLING DIKLAT</li>
+                <li class="nav-header">PENDAFTARAN PELATIHAN</li>
                 <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/pembayaran-diklat') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/pembayaran-diklat') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-hand-holding-usd"></i>
-                        <p class="text">Pembayaran</p>
+                    <a href="{{ url('dashboard/admin/pendaftaran-pelatihan') }}"
+                        class="nav-link {{ request()->is('dashboard/admin/pendaftaran-pelatihan') ? 'active bg-primary' : '' }}">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p class="text">Pendaftaran Peserta</p>
                     </a>
                 </li>
+
+                <li class="nav-header">KELOLA PELATIHAN</li>
+                <li class="nav-item">
+                    <a href="{{ url('dashboard/admin/daftar-pelatihan') }}"
+                        class="nav-link {{ request()->is('dashboard/admin/daftar-pelatihan') ? 'active bg-primary' : '' }}">
+                        <i class="nav-icon fab fa-buromobelexperte"></i>
+                        <p class="text">Daftar Pelatihan</p>
+                    </a>
+                </li>
+
+                <li class="nav-header">BILLING DIKLAT</li>
                 <li class="nav-item">
                     <a href="{{ url('dashboard/admin/rekap-pendapatan') }}"
                         class="nav-link {{ request()->is('dashboard/admin/rekap-pendapatan') ? 'active bg-primary' : '' }}">

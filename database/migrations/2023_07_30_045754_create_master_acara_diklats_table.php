@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('m_acara_diklat', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('kategori_soal_diklat_id');
+            $table->unsignedBigInteger('kategori_soal_diklat_id')->nullable();
             $table->string('nama_diklat');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->bigInteger('biaya_per_orang');
             $table->integer('role_max_peserta');
-            $table->string('brosur');
+            $table->string('browsur');
             $table->text('catatan');
             $table->tinyInteger('status')->default('0')->comment('0=hidden,1=aktif,2=tidak_aktif');
             $table->timestamps();
