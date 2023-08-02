@@ -5,13 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Form Tambah Acara Pelatihan</h1>
+                    <h1 class="m-0">Form Ubah Acara Pelatihan</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Kelola Pelatihan</a></li>
                         <li class="breadcrumb-item"><a href="{{ url('dashboad/admin/daftar-pelatihan') }}">Daftar Pelatihan</a></li>
-                        <li class="breadcrumb-item active">Form Tambah Acara Pelatihan</li>
+                        <li class="breadcrumb-item active">Form Ubah Acara Pelatihan</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
 
         <div class="card card-dark">
             <div class="card-header border-transparent">
-                <h3 class="card-title">Form Tambah Acara Pelatihan</h3>
+                <h3 class="card-title">Form Ubah Acara Pelatihan</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
@@ -36,16 +36,16 @@
                     </button>
                 </div>
             </div>
-            <form action="{{ url('dashboard/admin/daftar-pelatihan') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('dashboard/admin/daftar-pelatihan/'.base64_encode($detail->id)) }}" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
                     <div class="form-group row">
                         <label for="nama_pelatihan" class="col-sm-3 col-form-label">Nama Pelatihan</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control @error('nama_pelatihan') is-invalid @enderror"
                                 id="nama_pelatihan" name="nama_pelatihan" placeholder="Nama pelatihan"
-                                value="{{ old('nama_pelatihan') }}">
+                                value="{{ $detail->nama_diklat }}">
                             @error('nama_pelatihan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
                         <label for="tgl_mulai" class="col-sm-3 col-form-label">Tanggal Mulai</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control @error('tgl_mulai') is-invalid @enderror"
-                                id="tgl_mulai" name="tgl_mulai" value="{{ old('tgl_mulai') }}">
+                                id="tgl_mulai" name="tgl_mulai" value="{{ $detail->tgl_mulai }}">
                             @error('tgl_mulai')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                         <label for="tgl_selesai" class="col-sm-3 col-form-label">Tanggal Selesai</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control @error('tgl_selesai') is-invalid @enderror"
-                                id="tgl_selesai" name="tgl_selesai" value="{{ old('tgl_selesai') }}">
+                                id="tgl_selesai" name="tgl_selesai" value="{{ $detail->tgl_selesai }}">
                             @error('tgl_selesai')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
                         <div class="col-sm-9">
                             <input type="number" class="form-control @error('biaya_per_orang') is-invalid @enderror"
                                 id="r" name="biaya_per_orang" placeholder="Biaya per orang"
-                                value="{{ old('biaya_per_orang') }}">
+                                value="{{ $detail->biaya_per_orang }}">
                             @error('biaya_per_orang')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@
                         <div class="col-sm-9">
                             <input type="number" class="form-control @error('role_max_peserta') is-invalid @enderror"
                                 id="role_max_peserta" name="role_max_peserta" placeholder="Maksimal peserta"
-                                value="{{ old('role_max_peserta') }}">
+                                value="{{ $detail->role_max_peserta }}">
                             @error('role_max_peserta')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -117,8 +117,8 @@
                     <div class="form-group row">
                         <label for="catatan" class="col-sm-3 col-form-label">Catatan</label>
                         <div class="col-sm-9">
-                            <textarea name="catatan" id="catatan" cols="30" rows="10" class="form-control  @error('catatan') is-invalid @enderror">{{ old('catatan') }}</textarea>
-                            @error('browsur')
+                            <textarea name="catatan" id="catatan" cols="30" rows="10" class="form-control  @error('catatan') is-invalid @enderror">{{ $detail->catatan }}</textarea>
+                            @error('catatan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -130,9 +130,9 @@
                         <div class="col-sm-9">
                             <select name="status" id="status" class="form-control  @error('status') is-invalid @enderror">
                                 <option value="">-- Pilih status acara --</option>
-                                <option value="0">Hidden</option>
-                                <option value="1">Aktif</option>
-                                <option value="2">Tidak Aktif</option>
+                                <option value="0" {{ $detail->status == 0 ? 'selected' : '' }}>Hidden</option>
+                                <option value="1" {{ $detail->status == 1 ? 'selected' : '' }}>Aktif</option>
+                                <option value="2" {{ $detail->status == 2 ? 'selected' : '' }}>Tidak Aktif</option>
                             </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">

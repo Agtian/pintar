@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('surat_diklat_id');
+            $table->unsignedBigInteger('acara_diklat_id')->nullable();
             $table->string('kode_pendaftaran', 100);
             $table->integer('jumlah_peserta');
             $table->date('tgl_mulai');
@@ -24,6 +25,7 @@ return new class extends Migration
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('surat_diklat_id')->references('id')->on('t_surat_diklat')->onDelete('cascade');
+            $table->foreign('acara_diklat_id')->references('id')->on('m_acara_diklat')->onDelete('cascade');
         });
     }
 

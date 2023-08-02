@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterAcaraDiklat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class DaftarPelatihanController extends Controller
 {
@@ -29,6 +30,12 @@ class DaftarPelatihanController extends Controller
         return view('layouts.pelatihan.kelola-pelatihan.daftar-pelatihan.create');
     }
 
+    public function edit($id)
+    {
+        $detail = MasterAcaraDiklat::findOrFail(base64_decode($id));
+        return view('layouts.pelatihan.kelola-pelatihan.daftar-pelatihan.edit', compact('detail'));
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -38,7 +45,8 @@ class DaftarPelatihanController extends Controller
             'biaya_per_orang'   => 'required|integer',
             'role_max_peserta'  => 'required|integer',
             'browsur'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'catatan'           => '',
+            'catatan'           => 'nullable',
+            'status'            => 'required',
         ]);
 
         if ($browsur = $request->file('browsur')) {
@@ -59,8 +67,74 @@ class DaftarPelatihanController extends Controller
             'role_max_peserta'  => $validatedData['role_max_peserta'],
             'browsur'           => $uploadBrowsur,
             'catatan'           => $validatedData['catatan'],
+            'status'            => $validatedData['status'],
         ]);
 
         return redirect('dashboard/admin/daftar-pelatihan')->with(['success' => 'Acara pelatihan berhasil disimpan.']);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nama_pelatihan'    => 'required',
+            'tgl_mulai'         => 'required|date',
+            'tgl_selesai'       => 'required|date',
+            'biaya_per_orang'   => 'required|integer',
+            'role_max_peserta'  => 'required|integer',
+            'browsur'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'catatan'           => 'nullable',
+            'status'            => 'required'
+        ]);
+
+        if ($browsur = $request->file('browsur')) {
+            $query =  MasterAcaraDiklat::findOrFail(base64_decode($id));
+            $destinationPath = 'assets/images/browsur/';
+            if (File::exists($destinationPath.''.$query->browsur))
+            {
+                File::delete($destinationPath.''.$query->browsur);
+            }
+
+
+            $filename = date('YmdHis') . "-" . $this->replaceAll($request->nama_pelatihan) . "." . $browsur->getClientOriginalExtension();
+            $browsur->move($destinationPath, $filename);
+            $uploadBrowsur = "$filename";
+            MasterAcaraDiklat::findOrFail(base64_decode($id))->update([
+                'user_id'           => Auth::user()->id,
+                'nama_diklat'       => $validatedData['nama_pelatihan'],
+                'tgl_mulai'         => $validatedData['tgl_mulai'],
+                'tgl_selesai'       => $validatedData['tgl_selesai'],
+                'biaya_per_orang'   => $validatedData['biaya_per_orang'],
+                'role_max_peserta'  => $validatedData['role_max_peserta'],
+                'browsur'           => $uploadBrowsur,
+                'catatan'           => $validatedData['catatan'],
+                'status'            => $validatedData['status'],
+            ]);
+        } else {
+            $uploadBrowsur = "";
+            MasterAcaraDiklat::findOrFail(base64_decode($id))->update([
+                'user_id'           => Auth::user()->id,
+                'nama_diklat'       => $validatedData['nama_pelatihan'],
+                'tgl_mulai'         => $validatedData['tgl_mulai'],
+                'tgl_selesai'       => $validatedData['tgl_selesai'],
+                'biaya_per_orang'   => $validatedData['biaya_per_orang'],
+                'role_max_peserta'  => $validatedData['role_max_peserta'],
+                'catatan'           => $validatedData['catatan'],
+                'status'            => $validatedData['status'],
+            ]);
+        }
+
+        return redirect('dashboard/admin/daftar-pelatihan')->with(['success' => 'Acara pelatihan berhasil disimpan.']);
+    }
+
+    public function destroy($id)
+    {
+        $query =  MasterAcaraDiklat::findOrFail(base64_decode($id));
+        $destinationPath = 'assets/images/browsur/';
+        if (File::exists($destinationPath.''.$query->browsur))
+        {
+            File::delete($destinationPath.''.$query->browsur);
+        }
+        MasterAcaraDiklat::findOrFail(base64_decode($id))->delete();
+        return redirect()->back()->with('message', 'Acara pelatihan berhasil dihapus');
     }
 }

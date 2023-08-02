@@ -20,24 +20,41 @@
     <section class="content">
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Primary</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
+            @forelse ($resultAcaraPelatihan as $item)
+                <div class="col-md-4">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Primary</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid pad" src="{{ asset('assets/dist/img/photo2.png') }}" alt="Photo">
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('dashboard/admin/pendaftaran-pelatihan/registrasi/'.base64_encode($item->id)).'/reg' }}" class="btn btn-outline-primary float-right">Pilih Pelatihan</a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <img class="img-fluid pad" src="{{ asset('assets/dist/img/photo2.png') }}" alt="Photo">
-                    </div>
-                    <div class="card-footer">
-                        <a href="" class="btn btn-outline-primary float-right">Pilih Pelatihan</a>
+                </div>
+            @empty
+                <div class="col-12 mt-5">
+                    <div class="error-page">
+                        <h2 class="headline text-warning"> <i class="nav-icon fas fa-database"></i></h2>
+                
+                        <div class="error-content">
+                            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Pelatihan tidak tersedia.</h3>
+                            <p>
+                                Sistem tidak menemukan jadwal pelatihan pada master database. Silahkan
+                            anda membuat jadwal acara pelatihan dahulu, klik <a href="{{ url('dashboard/admin/daftar-pelatihan') }}">disini</a> untuk membuat jadwal acara pelatihan atau pergi ke menu Daftar Pelatihan.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforelse
+            
         </div>
 
     </section>

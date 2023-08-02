@@ -85,10 +85,10 @@
                                         @endif
                                     </td>
                                     <td align="center">
-                                        <a href="{{ url('dashboard/admin/master-jenis-kegiatan/' . base64_encode($item->id) . '/edit') }}"
+                                        <a href="{{ url('dashboard/admin/daftar-pelatihan/' . base64_encode($item->id) . '/edit') }}"
                                             class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i>
                                             Edit</a>
-                                        <a href="{{ url('dashboard/admin/master-jenis-kegiatan/' . base64_encode($item->id) . '/delete') }}"
+                                        <a href="{{ url('dashboard/admin/daftar-pelatihan/' . base64_encode($item->id) . '/delete') }}"
                                             onclick="return confirm('Are you sure, you want to delete this data?')"
                                             class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i>
                                             Delete</a>
