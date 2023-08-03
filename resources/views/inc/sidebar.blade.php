@@ -43,6 +43,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ url('dashboard/admin/pendaftaran') }}"
+                        class="nav-link {{ request()->is('dashboard/admin/pendaftaran') ? 'active bg-primary' : '' }}">
+                        <i class="nav-icon far fa-edit"></i>
+                        <p class="text">Pend. Peserta (MOU)</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ url('dashboard/admin/surat-balasan') }}"
                         class="nav-link {{ request()->is('dashboard/admin/surat-balasan') ? 'active bg-primary' : '' }}">
                         <i class="nav-icon fas fa-mail-bulk"></i>

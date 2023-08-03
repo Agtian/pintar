@@ -5,6 +5,7 @@ use App\Http\Controllers\BillingDiklat\PembayaranDiklatController;
 use App\Http\Controllers\BillingDiklat\RekapPendapatan;
 use App\Http\Controllers\Diklat\DaftarPesertaController;
 use App\Http\Controllers\Diklat\PendaftaranDiklatController;
+use App\Http\Controllers\Diklat\PendaftaranDiklatMOUController;
 use App\Http\Controllers\Diklat\SuratBalasanController;
 use App\Http\Controllers\HomeDashboard\HomeDashboard;
 use App\Http\Controllers\KelolaPelatihan\DaftarPelatihanController;
@@ -136,6 +137,15 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/pendaftaran-diklat/{pendaftarandiklat}/edit', 'edit');
         Route::put('/pendaftaran-diklat/{pendaftarandiklat}', 'update');
         Route::get('/pendaftaran-diklat/{pendaftarandiklat}/delete', 'destroy');
+    });
+
+    Route::controller(PendaftaranDiklatMOUController::class)->group(function () {
+        Route::get('/pendaftaran', 'index');
+        Route::get('/pendaftaran/create', 'create');
+        Route::post('/pendaftaran', 'store');
+        Route::get('/pendaftaran/{pendaftaran}/edit', 'edit');
+        Route::put('/pendaftaran/{pendaftaran}', 'update');
+        Route::get('/pendaftaran/{pendaftaran}/delete', 'destroy');
     });
 
     Route::controller(SuratBalasanController::class)->group(function () {
