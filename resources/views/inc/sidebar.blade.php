@@ -107,6 +107,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ url('dashboard/admin/master-tarif-pelatihan-pre-klinik') }}"
+                        class="nav-link {{ request()->is('dashboard/admin/master-tarif-pelatihan-pre-klinik') ? 'active bg-primary' : '' }}">
+                        <i class="nav-icon fas fa-comment-dollar"></i>
+                        <p>Tarif Pelatihan Pre Klinik</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ url('dashboard/admin/master-tarif-diklat') }}"
                         class="nav-link {{ request()->is('dashboard/admin/master-tarif-diklat') ? 'active bg-primary' : '' }}">
                         <i class="nav-icon fas fa-dollar-sign"></i>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Master\JenisPraktikan\JenisPraktikanController;
 use App\Http\Controllers\Master\Pegawai\PegawaiController;
 use App\Http\Controllers\Master\SatuanKegiatan\SatuanKegiatanController;
 use App\Http\Controllers\Master\TarifDiklat\TarifDiklatController;
+use App\Http\Controllers\Master\TarifPelatihanPreKlinik\TarifPelatihanPreKlinikController;
 use App\Http\Controllers\Master\UnitKerja\UnitKerjaController;
 use App\Http\Controllers\Pelatihan\PendaftaranPelatihanController;
 use App\Http\Controllers\SystemController\DropdownController;
@@ -81,6 +82,15 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/master-tarif-diklat/{tarifdiklat}/edit', 'edit');
         Route::put('/master-tarif-diklat/{tarifdiklat}', 'update');
         Route::get('/master-tarif-diklat/{tarifdiklat}/delete', 'destroy');
+    });
+
+    Route::controller(TarifPelatihanPreKlinikController::class)->group(function () {
+        Route::get('/master-tarif-pelatihan-pre-klinik', 'index');
+        Route::get('/master-tarif-pelatihan-pre-klinik/create', 'create');
+        Route::post('/master-tarif-pelatihan-pre-klinik', 'store');
+        Route::get('/master-tarif-pelatihan-pre-klinik/{tarifpreklinik}/edit', 'edit');
+        Route::put('/master-tarif-pelatihan-pre-klinik/{tarifpreklinik}', 'update');
+        Route::get('/master-tarif-pelatihan-pre-klinik/{tarifpreklinik}/delete', 'destroy');
     });
 
     Route::controller(JenisKegiatanController::class)->group(function () {

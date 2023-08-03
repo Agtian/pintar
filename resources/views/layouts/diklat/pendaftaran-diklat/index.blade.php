@@ -356,7 +356,7 @@
                                             <input type="text"
                                                 class="form-control"
                                                 id="tarif_kopetensi_dasar_kredesial @error('tarif_kopetensi_dasar_kredesial') is-invalid @enderror" name="tarif_kopetensi_dasar_kredesial" 
-                                                value="{{ $jumlah_tarif }}" readonly>
+                                                value="Rp. {{ $jumlah_tarif }}" readonly>
                                             @error('jumlah_peserta_tambahan')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

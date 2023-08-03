@@ -98,9 +98,9 @@ class PendaftaranDiklatController extends Controller
                     ->get();
 
         $queryTarifPreKlinik = MasterTarifPelatihanPreKlinik::where('status_tarif', 1)->get();
-        $jumlah_tarif = '';
+            $jumlah_tarif = 0;
         foreach ($queryTarifPreKlinik as $item) {
-            $jumlah_tarif = $item->jumlah_tarif;
+            $jumlah_tarif = number_format($item->jumlah_tarif, 2, '.',',');
         }
 
         return view('layouts.diklat.pendaftaran-diklat.index', compact('resultUnitKerja', 'resultJenisKegiatan', 'jumlah_tarif'));

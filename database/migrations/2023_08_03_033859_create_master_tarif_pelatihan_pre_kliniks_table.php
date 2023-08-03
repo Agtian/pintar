@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('no_perdir');
             $table->bigInteger('jasa_sarana');
             $table->bigInteger('jasa_pelayanan');
-            $table->bigInteger('jumlat_tarif');
+            $table->bigInteger('jumlah_tarif');
             $table->tinyInteger('status_tarif')->default('1')->comment('1=aktif,2=tidak_aktif');
             $table->timestamps();
         });
