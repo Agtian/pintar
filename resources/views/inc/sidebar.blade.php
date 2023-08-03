@@ -60,7 +60,7 @@
                 <li class="nav-header">PENDAFTARAN PELATIHAN</li>
                 <li class="nav-item">
                     <a href="{{ url('dashboard/admin/pendaftaran-pelatihan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/pendaftaran-pelatihan') ? 'active bg-primary' : '' }}">
+                        class="nav-link {{ request()->is('dashboard/admin/pendaftaran-pelatihan') || request()->segment(4) == 'registrasi' || request()->segment(4) == 'pembayaran' ? 'active bg-primary' : '' }}">
                         <i class="nav-icon fas fa-edit"></i>
                         <p class="text">Pendaftaran Peserta</p>
                     </a>

@@ -169,6 +169,7 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/pendaftaran-pelatihan/create', 'create');
         Route::post('/pendaftaran-pelatihan', 'store');
         Route::get('/pendaftaran-pelatihan/registrasi/{namapelatihan}/reg', 'registrasi');
+        Route::get('/pendaftaran-pelatihan/pembayaran/{namapelatihan}/paket', 'payment');
         Route::get('/pendaftaran-pelatihan/{pendaftaranpelatihan}/edit', 'edit');
         Route::put('/pendaftaran-pelatihan/{pendaftaranpelatihan}', 'update');
         Route::get('/pendaftaran-pelatihan/{pendaftaranpelatihan}/delete', 'destroy');

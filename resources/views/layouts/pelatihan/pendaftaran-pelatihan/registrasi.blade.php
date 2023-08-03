@@ -75,7 +75,7 @@
                             <div class="form-group row">
                                 <label for="tgl_selesai" class="col-sm-3 col-form-label">Tanggal Selesai</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control @error('nama_pelatihan') is-invalid @enderror"
+                                    <input type="date" class="form-control @error('tgl_selesai') is-invalid @enderror"
                                         id="tgl_selesai" name="tgl_selesai" value="{{ $detail->tgl_selesai }}" readonly>
                                     @error('tgl_selesai')
                                         <span class="invalid-feedback" role="alert">
@@ -123,6 +123,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            <input type="hidden" name="acara_diklat_id" value="{{ base64_encode($detail->id) }}">
                         </div>
                         <div class="col-3">
                             <div class="filtr-item" data-category="2, 4" data-sort="{{ $detail->nama_diklat }}">
@@ -187,7 +188,7 @@
                 </div>
                 <div class="card-footer clearfix">
                     <div class="btnSelanjutnya">
-                        <button type="submit" class="btn btn-outline-primary float-right">Selanjutnya</button>
+                        <button type="submit" class="btn btn-outline-primary float-right">Simpan Pendaftaran</button>
                     </div>
                     <a href="{{ url()->previous() }}" class="btn btn-outline-dark float-right mr-2">Kembali</a>
                 </div>

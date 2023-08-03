@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('t_pendapatan_diklat', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pendaftaran_diklat_id');
-            $table->unsignedBigInteger('surat_diklat_id');
-            $table->unsignedBigInteger('tarif_diklat_id');
-            $table->unsignedBigInteger('honorarium_diklat_id');
+            $table->unsignedBigInteger('surat_diklat_id')->nullable();
+            $table->unsignedBigInteger('tarif_diklat_id')->nullable();
+            $table->unsignedBigInteger('honorarium_diklat_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->bigInteger('jasa_sarana');
             $table->bigInteger('jasa_lainnya');
             $table->bigInteger('tarif_honorarium')->default('0');
             $table->integer('jumlah_peserta');
-            $table->integer('total_waktu');
+            $table->integer('total_waktu')->default('0');
             $table->bigInteger('total_tarif');
             $table->tinyInteger('f_status')->default('0')->comment('0=belum_lunas,1=lunas,2=batal');
             $table->timestamps();
