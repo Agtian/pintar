@@ -315,10 +315,49 @@
                                             <select name="opsi_honorarium" id="opsi_honorarium"
                                                 class="form-control @error('opsi_honorarium') is-invalid @enderror">
                                                 <option value="">-- Pilih biaya lainnya --</option>
-                                                <option value="ya">Dengan biaya honorarium CI</option>
-                                                <option value="tidak">Tidak dengan biaya honorarium CI</option>
+                                                <option value="ya" disabled>Dengan biaya honorarium CI</option>
+                                                <option value="tidak" selected>Tidak dengan biaya honorarium CI</option>
                                             </select>
                                             @error('opsi_honorarium')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card card-outline card-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title">Form Tambahan Peserta Kompetensi Dasar & Kredensial</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label for="jumlah_peserta_tambahan" class="col-sm-3 col-form-label">Jumlah Peserta Tambahan</label>
+                                        <div class="col-sm-3">
+                                            <input type="number"
+                                                class="form-control @error('jumlah_peserta_tambahan') is-invalid @enderror"
+                                                id="jumlah_peserta_tambahan" name="jumlah_peserta_tambahan" placeholder="Jumlah perserta tambahan"
+                                                value="{{ old('jumlah_peserta_tambahan') }}">
+                                            @error('jumlah_peserta_tambahan')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <label class="col-sm-3 col-form-label">Orang</label>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="tarif_kopetensi_dasar_kredesial" class="col-sm-3 col-form-label">Tarif Kompetensi Dasar & Kredensial / Orang</label>
+                                        <div class="col-sm-9">
+                                            <input type="text"
+                                                class="form-control"
+                                                id="tarif_kopetensi_dasar_kredesial @error('tarif_kopetensi_dasar_kredesial') is-invalid @enderror" name="tarif_kopetensi_dasar_kredesial" 
+                                                value="{{ $jumlah_tarif }}" readonly>
+                                            @error('jumlah_peserta_tambahan')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

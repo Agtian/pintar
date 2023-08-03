@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('acara_diklat_id')->nullable();
             $table->string('kode_pendaftaran', 100);
             $table->integer('jumlah_peserta');
+            $table->integer('jumlah_perserta_tambahan')->default(0);
             $table->date('tgl_mulai');
             $table->date('tgl_akhir');
             $table->dateTime('tgl_pendaftaran');

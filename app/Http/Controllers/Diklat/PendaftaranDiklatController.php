@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterHonorariumDiklat;
 use App\Models\MasterJenisKegiatanDiklat;
 use App\Models\MasterTarifDiklat;
+use App\Models\MasterTarifPelatihanPreKlinik;
 use App\Models\MasterUnitKerjaDiklat;
 use App\Models\TransPendaftaranDiklat;
 use App\Models\TransPendapatanDiklat;
@@ -96,7 +97,13 @@ class PendaftaranDiklatController extends Controller
                     ->distinct()
                     ->get();
 
-        return view('layouts.diklat.pendaftaran-diklat.index', compact('resultUnitKerja', 'resultJenisKegiatan'));
+        $queryTarifPreKlinik = MasterTarifPelatihanPreKlinik::where('status_tarif', 1)->get();
+        $jumlah_tarif = '';
+        foreach ($queryTarifPreKlinik as $item) {
+            $jumlah_tarif = $item->jumlah_tarif;
+        }
+
+        return view('layouts.diklat.pendaftaran-diklat.index', compact('resultUnitKerja', 'resultJenisKegiatan', 'jumlah_tarif'));
     }
 
     public function store(Request $request)
@@ -119,7 +126,15 @@ class PendaftaranDiklatController extends Controller
             'jumlah_peserta'    => 'required|integer',
 
             'opsi_honorarium'   => 'required',
+            
+            'jumlah_peserta_tambahan'   => 'nullable|integer',
         ]);
+
+        $queryTarifPreKlinik = MasterTarifPelatihanPreKlinik::where('status_tarif', 1)->get();
+        $jumlah_tarif_pre_klinik = '';
+        foreach ($queryTarifPreKlinik as $item) {
+            $jumlah_tarif_pre_klinik = $item->jumlah_tarif;
+        }
 
         $insertSuratDiklat = TransSuratDiklat::create([
             'user_id'           => Auth::user()->id,
@@ -138,6 +153,7 @@ class PendaftaranDiklatController extends Controller
             'surat_diklat_id'   => $insertSuratDiklat['id'],
             'kode_pendaftaran'  => $this->getAutoKode(),
             'jumlah_peserta'    => $validatedData['jumlah_peserta'],
+            'jumlah_pesjumlah_perserta_tambahanerta' => $validatedData['jumlah_perserta_tambahan'],
             'tgl_mulai'         => $validatedData['tgl_mulai'],
             'tgl_akhir'         => $validatedData['tgl_akhir'],
             'status_pendaftaran'=> 1, // aktif, belum lunas
@@ -162,7 +178,9 @@ class PendaftaranDiklatController extends Controller
             'jasa_lainnya'          => $jasa_lainnya,
             'tarif_honorarium'      => $tarif_honorarium,
             'jumlah_peserta'        => $validatedData['jumlah_peserta'],
+            'jumlah_perserta_tambahan' => $validatedData['jumlah_perserta_tambahan'],
             'total_waktu'           => $validatedData['total_waktu'],
+            'tarif_pre_klinik'      => $jumlah_tarif_pre_klinik,
             'total_tarif'           => $total_tarif,
             'f_status'              => 0
         ]);

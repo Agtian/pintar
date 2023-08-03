@@ -23,6 +23,7 @@ return new class extends Migration
             $table->bigInteger('tarif_honorarium')->default('0');
             $table->integer('jumlah_peserta');
             $table->integer('total_waktu')->default('0');
+            $table->bigInteger('tarif_pre_klinik')->default('0');
             $table->bigInteger('total_tarif');
             $table->tinyInteger('f_status')->default('0')->comment('0=belum_lunas,1=lunas,2=batal');
             $table->timestamps();
