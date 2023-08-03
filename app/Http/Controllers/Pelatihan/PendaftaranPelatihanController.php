@@ -8,6 +8,7 @@ use App\Models\TransPendaftaranDiklat;
 use App\Models\TransPendapatanDiklat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PendaftaranPelatihanController extends Controller
 {

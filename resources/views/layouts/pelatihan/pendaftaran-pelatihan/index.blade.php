@@ -21,18 +21,18 @@
 
         <div class="row">
             @forelse ($resultAcaraPelatihan as $item)
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Primary</h3>
+                            <h3 class="card-title">{{ $item->nama_diklat }}</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <img class="img-fluid pad" src="{{ asset('assets/dist/img/photo2.png') }}" alt="Photo">
+                        <div class="card-body bg-secondary">
+                            <img class="img-fluid pad" src="{{ asset('assets/images/browsur').'/'.$item->browsur }}" alt="{{ $item->nama_diklat }}" width="100%">
                         </div>
                         <div class="card-footer">
                             <a href="{{ url('dashboard/admin/pendaftaran-pelatihan/registrasi/'.base64_encode($item->id)).'/reg' }}" class="btn btn-outline-primary float-right">Pilih Pelatihan</a>
