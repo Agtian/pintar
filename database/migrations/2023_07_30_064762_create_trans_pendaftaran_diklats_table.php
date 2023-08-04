@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('tgl_mulai');
             $table->date('tgl_akhir');
             $table->dateTime('tgl_pendaftaran');
-            $table->tinyInteger('status_pendaftaran')->default('1')->comment('1=aktif_belum_lunas,2=aktif_lunas,3=selesai_lunas,4=batal');
+            $table->tinyInteger('status_pendaftaran')->default('1')->comment('0=pending_peserta,1=aktif_belum_lunas,2=aktif_lunas,3=selesai_lunas,4=batal');
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

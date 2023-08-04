@@ -153,7 +153,7 @@ class PendaftaranDiklatController extends Controller
             'surat_diklat_id'   => $insertSuratDiklat['id'],
             'kode_pendaftaran'  => $this->getAutoKode(),
             'jumlah_peserta'    => $validatedData['jumlah_peserta'],
-            'jumlah_pesjumlah_perserta_tambahanerta' => $validatedData['jumlah_perserta_tambahan'],
+            'jumlah_perserta_tambahan' => $validatedData['jumlah_perserta_tambahan'],
             'tgl_mulai'         => $validatedData['tgl_mulai'],
             'tgl_akhir'         => $validatedData['tgl_akhir'],
             'status_pendaftaran'=> 1, // aktif, belum lunas

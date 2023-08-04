@@ -34,7 +34,7 @@
                     </button>
                 </div>
             </div>
-            <form action="{{ url('dashboard/admin/pendaftaran-diklat') }}" method="POST">
+            <form action="{{ url('dashboard/admin/pendaftaran') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="card-body p-2">
@@ -42,6 +42,7 @@
                         <div class="col-5 col-sm-3">
                             <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
                                 <a class="nav-link active" id="vert-tabs-panduan-tab" data-toggle="pill" href="#vert-tabs-panduan" role="tab" aria-controls="vert-tabs-panduan" aria-selected="true">Panduan</a>
+                                <a class="nav-link" id="vert-tabs-daftar-mou-tab" data-toggle="pill" href="#vert-tabs-daftar-mou" role="tab" aria-controls="vert-tabs-daftar-mou" aria-selected="true">Daftar Peserta MOU</a>
                                 <a class="nav-link" id="vert-tabs-unggah-tab" data-toggle="pill" href="#vert-tabs-unggah" role="tab" aria-controls="vert-tabs-unggah" aria-selected="false">Unggah Surat Permohonan Diklat</a>
                                 <a class="nav-link" id="vert-tabs-rincian-tab" data-toggle="pill" href="#vert-tabs-rincian" role="tab" aria-controls="vert-tabs-rincian" aria-selected="false">Form Rincian Diklat</a>
                                 <a class="nav-link" id="vert-tabs-peserta-tab" data-toggle="pill" href="#vert-tabs-peserta" role="tab" aria-controls="vert-tabs-peserta" aria-selected="false">Form Peserta Diklat</a>
@@ -51,6 +52,50 @@
                             <div class="tab-content" id="vert-tabs-tabContent">
                                 <div class="tab-pane text-left fade show active" id="vert-tabs-panduan" role="tabpanel" aria-labelledby="vert-tabs-panduan-tab">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
+                                </div>
+                                <div class="tab-pane fade" id="vert-tabs-daftar-mou" role="tabpanel" aria-labelledby="vert-tabs-daftar-mou-tab">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr class="bg-secondary">
+                                                    <th width="50"></th>
+                                                    <th width="50">NO</th>
+                                                    <th>INSTANSI</th>
+                                                    <th>BIDANG KERJA SAMA</th>
+                                                    <th>TANGGAL MOU</th>
+                                                    <th>STATUS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($resultDaftarMOU as $item)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input" type="radio" id="customRadio{{ base64_encode($item->id) }}" name="customRadioPilih" value="{{ $item->id }}">
+                                                                <label for="customRadio{{ $item->id }}" class="custom-control-label">Pilih</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $loop->iteration + $resultDaftarMOU->firstItem() - 1 }}</td>
+                                                        <td>{{ $item->nama_instansi}}</td>
+                                                        <td>{{ $item->bidang_kerjasama}}</td>
+                                                        <td>{{ $item->tgl_mulai_mou . ' s.d ' . $item->tgl_akhir_mou }}</td>
+                                                        <td>
+                                                            @if ($item->status_mou == 1)
+                                                                <button class="btn btn-xs btn-success">Aktif</button>
+                                                            @else
+                                                                <button class="btn btn-xs btn-danger">Tidak Aktif</button>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr><td colspan="6" align="center">Daftar MOU tidak tersedia !</td></tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                        <div>
+                                            {{ $resultDaftarMOU->links() }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="vert-tabs-unggah" role="tabpanel" aria-labelledby="vert-tabs-unggah-tab">
                                     Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
@@ -129,6 +174,30 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
+                                                <label for="tgl_awal" class="col-sm-3 col-form-label">Tanggal Diklat</label>
+                                                <div class="col-sm-4">
+                                                    <input type="date"
+                                                        class="form-control @error('tgl_awal') is-invalid @enderror"
+                                                        id="tgl_awal" name="tgl_awal" value="{{ old('tgl_awal') }}">
+                                                    @error('tgl_awal')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <label for="tgl_akhir" class="col-form-label"> s.d</label>
+                                                <div class="col-sm-4">
+                                                    <input type="date"
+                                                        class="form-control @error('tgl_akhir') is-invalid @enderror"
+                                                        id="tgl_akhir" name="tgl_akhir" alue="{{ old('tgl_akhir') }}">
+                                                    @error('tgl_akhir')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label for="jenis_praktikan_id" class="col-sm-3 col-form-label">Jenis
                                                     Praktikan</label>
                                                 <div class="col-sm-9">
@@ -152,22 +221,6 @@
                                                         id="jumlah_peserta" name="jumlah_peserta" placeholder="Jumlah Peserta"
                                                         value="{{ old('jumlah_peserta') }}">
                                                     @error('jumlah_peserta')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="opsi_honorarium" class="col-sm-3 col-form-label">Biaya Lainnya</label>
-                                                <div class="col-sm-9">
-                                                    <select name="opsi_honorarium" id="opsi_honorarium"
-                                                        class="form-control @error('opsi_honorarium') is-invalid @enderror">
-                                                        <option value="">-- Pilih biaya lainnya --</option>
-                                                        <option value="ya" disabled>Dengan biaya honorarium CI</option>
-                                                        <option value="tidak" selected>Tidak dengan biaya honorarium CI</option>
-                                                    </select>
-                                                    @error('opsi_honorarium')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>

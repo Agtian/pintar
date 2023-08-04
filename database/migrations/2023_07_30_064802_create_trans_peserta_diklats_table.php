@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('jenis_praktikan_id');
             $table->unsignedBigInteger('user_id');
             $table->string('nama');
-            $table->text('alamat');
+            $table->text('alamat')->nullable();
             $table->string('email')->unique();
             $table->string('no_hp', 18);
-            $table->string('nama_sekolah');
+            $table->string('nama_sekolah')->nullable();
             $table->string('jurusan')->nullable();
             $table->string('jabatan')->nullable();
             $table->timestamps();

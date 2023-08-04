@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('t_surat_diklat', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('no_surat_diklat', 100);
+            $table->string('no_surat_diklat', 100)->nullable();
             $table->date('tgl_surat_diklat');
             $table->string('perihal');
             $table->string('surat_dari');

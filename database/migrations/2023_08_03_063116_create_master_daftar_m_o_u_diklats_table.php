@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('tgl_mou');
             $table->string('bidang_kerjasama');
             $table->string('nama_instansi');
+            $table->string('kota_instansi');
             $table->string('nama_ttd_mou');
             $table->string('nip_tdd_mou');
             $table->string('jabatan_tdd_mou');
