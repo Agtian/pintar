@@ -88,8 +88,10 @@
                                                 @endif
                                             </td>
                                             <td align="center">
-                                                <a href="" class="btn btn-sm btn-outline-info m-1"><i
-                                                        class="nav-icon fas fa-eye"></i></a>
+                                                <button type="button" class="btn btn-sm btn-outline-info m-1"
+                                                    data-toggle="modal"
+                                                    data-target="#modal-detail-{{ $item->pendaftaran_diklat_id }}"><i
+                                                        class="nav-icon fas fa-eye"></i></button>
                                                 <a href="{{ url('dashboard/admin/daftar-peserta/' . base64_encode($item->kode_pendaftaran) . '/edit') }}"
                                                     class="btn btn-sm btn-outline-warning m-1"><i
                                                         class="nav-icon fas fa-edit"></i></a>
@@ -113,4 +115,62 @@
             </div>
         </div>
     </section>
+
+    @foreach ($resultDaftarPeserta as $item)
+        <div class="modal fade" id="modal-detail-{{ $item->pendaftaran_diklat_id }}">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Rincian Peserta Diklat</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <td width="150">Nama Instansi</td>
+                                <td>: {{ $item->nama_instansi }}</td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Diklat</td>
+                                <td>: {{ $item->tgl_mulai . ' s.d ' . $item->tgl_akhir }}
+                                    ({{ $item->total_waktu . ' ' . $item->alias }})
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Peserta</td>
+                                <td>: {{ $item->jumlah_peserta }} orang</td>
+                            </tr>
+                            <tr>
+                                <td>Rincian Biaya</td>
+                                <td>:
+                                    {{ $item->nama_kegiatan . ' ' . $item->jenis_praktikan . ' Rp. ' . number_format($item->jumlah, 2, '.', ',') . ' x jumlah peserta ' . $item->jumlah_peserta . ' orang x lama kegiatan ' . $item->total_waktu . ' ' . $item->alias }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total Biaya</td>
+                                <td>: Rp. {{ number_format($item->total_tarif, 2, '.', ',') }}</td>
+                            </tr>
+                            <tr>
+                                <td>Unduh Dokumen</td>
+                                <td>:
+                                    <a href="" class="btn btn-sm btn-primary" target="_blank">Surat Permohonan
+                                        Diklat</a>
+                                    <a href="" class="btn btn-sm btn-primary" target="_blank">Surat Balasan</a>
+                                    <a href="" class="btn btn-sm btn-primary" target="_blank">Retribusi</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        @livewire('diklat.daftar-peserta.modal-table-peserta-diklat', ['pendaftaran_diklat_id' => $item->pendaftaran_diklat_id])
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark float-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection

@@ -46,6 +46,7 @@ Route::get('/home-dashboard', [HomeDashboard::class, 'index'])->name('home-dashb
 
 Route::post('api/fetch-satuan-kegiatan-diklat', [DropdownController::class, 'getSatuanKegiatan']);
 Route::post('api/fetch-jenis-praktikan-diklat', [DropdownController::class, 'getJenisPraktikan']);
+Route::get('api/fetch-table-peserta-diklat/{kode}/result', [DropdownController::class, 'getTablePesertaDiklat']);
 
 Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
