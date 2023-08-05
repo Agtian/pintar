@@ -167,8 +167,8 @@ class PendaftaranDiklatController extends Controller
         $tarif_honorarium       = $this->getHonorariumDiklat($request->opsi_honorarium, $request->satuan_kegiatan_id)['tarif_honorarium'];
 
         $total_tarif = (($jumlah * $request->jumlah_peserta) * $request->total_waktu) + (($tarif_honorarium * $request->jumlah_peserta) * $request->total_waktu);
-        if ($validatedData['jumlah_perserta_tambahan']) {
-            $fix_total_tarif = ($validatedData['jumlah_perserta_tambahan'] * $jumlah_tarif_pre_klinik) + $total_tarif;
+        if ($validatedData['jumlah_peserta_tambahan']) {
+            $fix_total_tarif = ($validatedData['jumlah_peserta_tambahan'] * $jumlah_tarif_pre_klinik) + $total_tarif;
         } else {
             $fix_total_tarif = $total_tarif;
         }
@@ -183,7 +183,7 @@ class PendaftaranDiklatController extends Controller
             'jasa_lainnya'          => $jasa_lainnya,
             'tarif_honorarium'      => $tarif_honorarium,
             'jumlah_peserta'        => $validatedData['jumlah_peserta'],
-            'jumlah_perserta_tambahan' => $validatedData['jumlah_perserta_tambahan'],
+            'jumlah_peserta_tambahan' => $validatedData['jumlah_peserta_tambahan'],
             'total_waktu'           => $validatedData['total_waktu'],
             'tarif_pre_klinik'      => $jumlah_tarif_pre_klinik,
             'total_tarif'           => $fix_total_tarif,

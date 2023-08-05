@@ -5,12 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Form Pendaftaran Diklat</h1>
+                    <h1 class="m-0">Form Edit Pendaftaran Diklat</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Diklat</a></li>
-                        <li class="breadcrumb-item active">Form Pendaftaran Diklat</li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/admin/daftar-peserta') }}">Daftar Peserta</a>
+                        </li>
+                        <li class="breadcrumb-item active">Form Edit Pendaftaran Diklat</li>
                     </ol>
                 </div>
             </div>
@@ -23,7 +24,7 @@
 
         <div class="card card-dark">
             <div class="card-header border-transparent">
-                <h3 class="card-title">Form Pendaftaran Diklat</h3>
+                <h3 class="card-title">Form Edit Pendaftaran Diklat</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -34,15 +35,16 @@
                     </button>
                 </div>
             </div>
-            <form action="{{ url('dashboard/admin/pendaftaran-diklat') }}" method="POST">
+            <form action="{{ url('dashboard/admin/daftar-peserta/' . base64_encode($detail['pendaftaran_diklat_id'])) }}"
+                method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="card-body p-2">
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-outline card-dark">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Surat Balasan</h3>
+                                    <h3 class="card-title">Form Edit Surat Balasan</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group row">
@@ -52,7 +54,7 @@
                                                 <input type="text"
                                                     class="form-control @error('no_surat_diklat') is-invalid @enderror"
                                                     id="no_surat_diklat" name="no_surat_diklat" placeholder="No Surat Masuk"
-                                                    value="{{ old('no_surat_diklat') }}">
+                                                    value="{{ $detail['no_surat_diklat'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -72,7 +74,8 @@
                                                 <input type="date"
                                                     class="form-control @error('tgl_surat_diklat') is-invalid @enderror"
                                                     id="tgl_surat_diklat" name="tgl_surat_diklat"
-                                                    placeholder="Tanggal Surat Masuk" value="{{ old('tgl_surat_diklat') }}">
+                                                    placeholder="Tanggal Surat Masuk"
+                                                    value="{{ $detail['tgl_surat_diklat'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -91,7 +94,7 @@
                                                 <input type="text"
                                                     class="form-control @error('perihal') is-invalid @enderror"
                                                     id="perihal" name="perihal" placeholder="Perihal"
-                                                    value="{{ old('perihal') }}">
+                                                    value="{{ $detail['perihal'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -110,7 +113,7 @@
                                                 <input type="text"
                                                     class="form-control @error('surat_dari') is-invalid @enderror"
                                                     id="surat_dari" name="surat_dari" placeholder="Surat dari"
-                                                    value="{{ old('surat_dari') }}">
+                                                    value="{{ $detail['surat_dari'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -131,7 +134,7 @@
                                                     class="form-control @error('nama_instansi') is-invalid @enderror"
                                                     id="nama_instansi" name="nama_instansi"
                                                     placeholder="Nama instansi / sekolah / universitas"
-                                                    value="{{ old('nama_instansi') }}">
+                                                    value="{{ $detail['nama_instansi'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -152,7 +155,7 @@
                                                     class="form-control @error('kota_instansi') is-invalid @enderror"
                                                     id="kota_instansi" name="kota_instansi"
                                                     placeholder="Kota instansi / sekolah / universitas"
-                                                    value="{{ old('kota_instansi') }}">
+                                                    value="{{ $detail['kota_instansi'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -171,7 +174,7 @@
                                             <div class="input-group">
                                                 <input type="date"
                                                     class="form-control @error('tgl_mulai') is-invalid @enderror"
-                                                    id="tgl_mulai" name="tgl_mulai" value="{{ old('tgl_mulai') }}">
+                                                    id="tgl_mulai" name="tgl_mulai" value="{{ $detail['tgl_mulai'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -190,7 +193,7 @@
                                             <div class="input-group">
                                                 <input type="date"
                                                     class="form-control @error('tgl_akhir') is-invalid @enderror"
-                                                    id="tgl_akhir" name="tgl_akhir" value="{{ old('tgl_akhir') }}">
+                                                    id="tgl_akhir" name="tgl_akhir" value="{{ $detail['tgl_akhir'] }}">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="btn btn-info">Info</button>
                                                 </div>
@@ -206,10 +209,15 @@
                             </div>
                         </div>
 
+                        <input type="hidden" name="surat_diklat_id"
+                            value="{{ base64_encode($detail['surat_diklat_id']) }}">
+                        <input type="hidden" name="kode_pendaftaran"
+                            value="{{ base64_encode($detail['kode_pendaftaran']) }}">
+
                         <div class="col-12">
                             <div class="card card-outline card-dark">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Rincian Diklat</h3>
+                                    <h3 class="card-title">Form Edit Rincian Diklat</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group row">
@@ -271,7 +279,7 @@
                                             <input type="number"
                                                 class="form-control @error('total_waktu') is-invalid @enderror"
                                                 id="total_waktu" name="total_waktu" placeholder="Lama Waktu kegiatan"
-                                                value="{{ old('total_waktu') }}">
+                                                value="{{ $detail['total_waktu'] }}">
                                             @error('total_waktu')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -301,7 +309,7 @@
                                             <input type="number"
                                                 class="form-control @error('jumlah_peserta') is-invalid @enderror"
                                                 id="jumlah_peserta" name="jumlah_peserta" placeholder="Jumlah Peserta"
-                                                value="{{ old('jumlah_peserta') }}">
+                                                value="{{ $detail['jumlah_peserta'] }}">
                                             @error('jumlah_peserta')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -332,7 +340,7 @@
                         <div class="col-12">
                             <div class="card card-outline card-dark">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Tambahan Peserta Kompetensi Dasar & Kredensial</h3>
+                                    <h3 class="card-title">Form Edit Tambahan Peserta Kompetensi Dasar & Kredensial</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group row">
@@ -343,7 +351,7 @@
                                                 class="form-control @error('jumlah_peserta_tambahan') is-invalid @enderror"
                                                 id="jumlah_peserta_tambahan" name="jumlah_peserta_tambahan"
                                                 placeholder="Jumlah perserta tambahan"
-                                                value="{{ old('jumlah_peserta_tambahan') }}">
+                                                value="{{ $detail['jumlah_peserta_tambahan'] }}">
                                             @error('jumlah_peserta_tambahan')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -360,7 +368,7 @@
                                                 id="tarif_kopetensi_dasar_kredesial @error('tarif_kopetensi_dasar_kredesial') is-invalid @enderror"
                                                 name="tarif_kopetensi_dasar_kredesial" value="Rp. {{ $jumlah_tarif }}"
                                                 readonly>
-                                            @error('tarif_kopetensi_dasar_kredesial')
+                                            @error('jumlah_peserta_tambahan')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

@@ -90,7 +90,8 @@
                                             <td align="center">
                                                 <a href="" class="btn btn-sm btn-outline-info m-1"><i
                                                         class="nav-icon fas fa-eye"></i></a>
-                                                <a href="" class="btn btn-sm btn-outline-warning m-1"><i
+                                                <a href="{{ url('dashboard/admin/daftar-peserta/' . base64_encode($item->kode_pendaftaran) . '/edit') }}"
+                                                    class="btn btn-sm btn-outline-warning m-1"><i
                                                         class="nav-icon fas fa-edit"></i></a>
                                                 <a href="" class="btn btn-sm btn-outline-danger m-1"><i
                                                         class="nav-icon fas fa-trash-alt"></i></a>
