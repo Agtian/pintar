@@ -163,7 +163,7 @@
                             </tr>
                         </table>
 
-                        @livewire('diklat.daftar-peserta.modal-table-peserta-diklat', ['pendaftaran_diklat_id' => $item->pendaftaran_diklat_id])
+                        @livewire('diklat.daftar-peserta.modal-table-peserta-diklat', ['send_pendaftaran_diklat_id' => $item->pendaftaran_diklat_id])
 
                     </div>
                     <div class="modal-footer">

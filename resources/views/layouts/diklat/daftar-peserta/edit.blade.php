@@ -22,12 +22,6 @@
 
         @include('inc.alert')
 
-        @if (session()->has('message-livewire'))
-            <div class="alert alert-success">
-                {{ session('message-livewire') }}
-            </div>
-        @endif
-
         <div class="card card-dark">
             <div class="card-header border-transparent">
                 <h3 class="card-title">Form Edit Pendaftaran Diklat</h3>
@@ -474,7 +468,7 @@
                                 <div class="tab-pane fade" id="custom-tabs-one-peserta" role="tabpanel"
                                     aria-labelledby="custom-tabs-one-peserta-tab">
 
-                                    @livewire('diklat.daftar-peserta.table-list-peserta-diklat', ['pendaftaran_diklat_id' => base64_encode($detail['pendaftaran_diklat_id'])])
+                                    @livewire('diklat.daftar-peserta.table-list-peserta-diklat', ['send_pendaftaran_diklat_id' => base64_encode($detail['pendaftaran_diklat_id'])])
 
                                 </div>
                             </div>

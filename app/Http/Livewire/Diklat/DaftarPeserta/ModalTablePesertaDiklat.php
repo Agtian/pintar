@@ -7,11 +7,11 @@ use Livewire\Component;
 
 class ModalTablePesertaDiklat extends Component
 {
-    public $pendaftaran_diklat_id;
+    public $send_pendaftaran_diklat_id;
 
     public function render()
     {
-        $resultPesertaDiklat = TransPesertaDiklat::where('pendaftaran_diklat_id', $this->pendaftaran_diklat_id)->get();
+        $resultPesertaDiklat = TransPesertaDiklat::where('pendaftaran_diklat_id', $this->send_pendaftaran_diklat_id)->get();
         return view('livewire.diklat.daftar-peserta.modal-table-peserta-diklat', compact('resultPesertaDiklat'));
     }
 }
