@@ -41,10 +41,13 @@ class TableListPesertaDiklat extends Component
 
     public function render()
     {
-        $resultPesertaDiklat = TransPesertaDiklat::where('pendaftaran_diklat_id', base64_decode($this->send_pendaftaran_diklat_id))->paginate(10);
-        
-        $resultJenisPraktikan = MasterJenisPraktikanDiklat::all();
-        return view('livewire.diklat.daftar-peserta.table-list-peserta-diklat', compact('resultPesertaDiklat', 'resultJenisPraktikan'));
+        $resultPesertaDiklat    = TransPesertaDiklat::where('pendaftaran_diklat_id', base64_decode($this->send_pendaftaran_diklat_id))->paginate(10);
+        $resultJenisPraktikan   = MasterJenisPraktikanDiklat::all();
+        $getTPendaftaranDiklat  = TransPendaftaranDiklat::findOrFail(base64_decode($this->send_pendaftaran_diklat_id));
+
+        $totalPeserta = $getTPendaftaranDiklat->jumlah_peserta + $getTPendaftaranDiklat->jumlah_perserta_tambahan;
+
+        return view('livewire.diklat.daftar-peserta.table-list-peserta-diklat', compact('resultPesertaDiklat', 'resultJenisPraktikan', 'totalPeserta'));
     }
 
     public function editPeserta(int $id)
@@ -66,7 +69,6 @@ class TableListPesertaDiklat extends Component
     public function store()
     {
         $this->validate([
-            'pendaftaran_diklat_id' => 'required',
             'jenis_praktikan_id'    => 'required|integer',
             'nama'                  => 'required|string',
             'alamat'                => 'required|string',
@@ -77,25 +79,36 @@ class TableListPesertaDiklat extends Component
             'jabatan'               => 'required|string',
         ]);
 
-        $getDataPendaftaran = TransPendaftaranDiklat::findOrFail(base64_decode($this->pendaftaran_diklat_id));
+        $getDataPendaftaran = TransPendaftaranDiklat::findOrFail(base64_decode($this->send_pendaftaran_diklat_id));
+        $countData = TransPesertaDiklat::where('pendaftaran_diklat_id', base64_decode($this->send_pendaftaran_diklat_id))->get();
 
-        TransPesertaDiklat::create([
-            'user_id'               => Auth::user()->id,
-            'pendaftaran_diklat_id' => base64_decode($this->pendaftaran_diklat_id),
-            'surat_diklat_id'       => $getDataPendaftaran->surat_diklat_id,
-            'jenis_praktikan_id'    => $this->jenis_praktikan_id,
-            'nama'                  => $this->nama,
-            'alamat'                => $this->alamat,
-            'email'                 => $this->email,
-            'no_hp'                 => $this->no_hp,
-            'nama_sekolah'          => $this->nama_sekolah,
-            'jurusan'               => $this->jurusan,
-            'jabatan'               => $this->jabatan,
-        ]);
-
-        session()->flash('message-livewire', 'Data berhasil disimpan.');
-        $this->dispatchBrowserEvent('close-modal');
-        $this->emit(event:'refreshComponent');
+        if ($countData->count() == ($getDataPendaftaran->jumlah_peserta + $getDataPendaftaran->jumlah_peserta_tambahan)) {
+            session()->flash('message-livewire-danger', 'Peserta yang anda input melebihi batas yang anda ajukan.');
+            $this->dispatchBrowserEvent('close-modal');
+            $this->emit(event:'refreshComponent');
+        } else if ($countData->count() < ($getDataPendaftaran->jumlah_peserta + $getDataPendaftaran->jumlah_peserta_tambahan)) {
+            TransPesertaDiklat::create([
+                'user_id'               => Auth::user()->id,
+                'pendaftaran_diklat_id' => base64_decode($this->send_pendaftaran_diklat_id),
+                'surat_diklat_id'       => $getDataPendaftaran->surat_diklat_id,
+                'jenis_praktikan_id'    => $this->jenis_praktikan_id,
+                'nama'                  => $this->nama,
+                'alamat'                => $this->alamat,
+                'email'                 => $this->email,
+                'no_hp'                 => $this->no_hp,
+                'nama_sekolah'          => $this->nama_sekolah,
+                'jurusan'               => $this->jurusan,
+                'jabatan'               => $this->jabatan,
+            ]);
+    
+            session()->flash('message-livewire', 'Data berhasil disimpan.');
+            $this->dispatchBrowserEvent('close-modal');
+            $this->emit(event:'refreshComponent');
+        } else {
+            session()->flash('message-livewire-danger', 'Peserta yang anda input melebihi batas yang anda ajukan.');
+            $this->dispatchBrowserEvent('close-modal');
+            $this->emit(event:'refreshComponent');
+        }
     }
 
     public function updatePeserta()

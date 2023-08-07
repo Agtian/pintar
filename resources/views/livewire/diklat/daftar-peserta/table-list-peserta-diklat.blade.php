@@ -9,6 +9,13 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+    @elseif (session('message-livewire-danger'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Gagal!</strong> <br> {{ session('message-livewire-danger') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     @endif
 
     <div class="card card-outline card-dark">
@@ -17,6 +24,9 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add">
                     Tambah Peserta
                 </button>
+            </div>
+            <div class="text-muted mt-3">
+                <b>* Anda hanya dapat menginput {{ $totalPeserta }} peserta, sesuai dengan permohonan yang diajukan.</b>
             </div>
         </div>
 
@@ -39,14 +49,19 @@
                     @forelse ($resultPesertaDiklat as $item)
                         <tr>
                             <td>
-                                <span data-toggle="tooltip" data-placement="bottom" title="Edit peserta">
-                                    <button type="button" wire:click.prevent="editPeserta({{ $item->id }})"
-                                        class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal-edit"><i
-                                            class="fas fa-edit"></i></button>
-                                </span>
-                                <button type="button" wire:click.prevent="deletePeserta({{ $item->id }})"
-                                    class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom"
-                                    title="Hapus peserta"><i class="far fa-trash-alt"></i></button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-dark dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu" role="menu">
+                                        <span data-toggle="tooltip" data-placement="bottom" title="Edit peserta">
+                                            <a class="dropdown-item" wire:click.prevent="editPeserta({{ $item->id }})" data-toggle="modal" data-target="#modal-edit"><i
+                                                class="fas fa-edit"></i> Edit</a>
+                                        </span>
+                                        <a class="dropdown-item" wire:click.prevent="deletePeserta({{ $item->id }})" data-toggle="tooltip" data-placement="bottom"
+                                            title="Hapus peserta"><i class="far fa-trash-alt"></i> Hapus</a>
+                                    </div>
+                                </div>
                             </td>
                             <td align="center">{{ $loop->iteration + $resultPesertaDiklat->firstItem() - 1 }}</td>
                             <td>{{ $item->nama }}</td>
