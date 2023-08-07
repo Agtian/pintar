@@ -58,7 +58,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('dashboard/admin/daftar-peserta') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/daftar-peserta') ? 'active bg-primary' : '' }}">
+                        class="nav-link {{ request()->is('dashboard/admin/daftar-peserta') || request()->segment(3) == 'daftar-peserta' ? 'active bg-primary' : '' }}">
                         <i class="nav-icon fas fa-chalkboard-teacher"></i>
                         <p class="text">Daftar Peserta</p>
                     </a>
