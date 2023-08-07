@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('no_surat_diklat', 100)->nullable();
             $table->date('tgl_surat_diklat');
+            $table->string('file_surat_permohonan')->nullable();
             $table->string('perihal');
             $table->string('surat_dari');
             $table->string('nama_instansi');

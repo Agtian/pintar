@@ -9,6 +9,7 @@ use App\Http\Controllers\Diklat\PendaftaranDiklatMOUController;
 use App\Http\Controllers\Diklat\SuratBalasanController;
 use App\Http\Controllers\HomeDashboard\HomeDashboard;
 use App\Http\Controllers\KelolaPelatihan\DaftarPelatihanController;
+use App\Http\Controllers\Master\DaftarMOU\DaftarMOUController;
 use App\Http\Controllers\Master\HonorariumDiklat\HonorariumDiklatController;
 use App\Http\Controllers\Master\JenisKegiatan\JenisKegiatanController;
 use App\Http\Controllers\Master\JenisPraktikan\JenisPraktikanController;
@@ -66,6 +67,15 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/master-pegawai/{pegawai}/edit', 'edit');
         Route::put('/master-pegawai/{pegawai}', 'update');
         Route::get('/master-pegawai/{pegawai}/delete', 'destroy');
+    });
+
+    Route::controller(DaftarMOUController::class)->group(function () {
+        Route::get('/master-daftar-mou', 'index');
+        Route::get('/master-daftar-mou/create', 'create');
+        Route::post('/master-daftar-mou', 'store');
+        Route::get('/master-daftar-mou/{daftarmou}/edit', 'edit');
+        Route::put('/master-daftar-mou/{daftarmou}', 'update');
+        Route::get('/master-daftar-mou/{daftarmou}/delete', 'destroy');
     });
 
     Route::controller(HonorariumDiklatController::class)->group(function () {
@@ -144,6 +154,7 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/pendaftaran', 'index');
         Route::get('/pendaftaran/create', 'create');
         Route::post('/pendaftaran', 'store');
+        Route::get('/pendaftaran/{pendaftaran}/resume', 'resume');
         Route::get('/pendaftaran/{pendaftaran}/edit', 'edit');
         Route::put('/pendaftaran/{pendaftaran}', 'update');
         Route::get('/pendaftaran/{pendaftaran}/delete', 'destroy');

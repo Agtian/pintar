@@ -107,6 +107,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ url('dashboard/admin/master-daftar-mou') }}"
+                        class="nav-link {{ request()->is('dashboard/admin/master-daftar-mou') ? 'active bg-primary' : '' }}">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        <p>Daftar MOU</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ url('dashboard/admin/master-honorarium') }}"
                         class="nav-link {{ request()->is('dashboard/admin/master-honorarium') ? 'active bg-primary' : '' }}">
                         <i class="nav-icon fas fa-funnel-dollar"></i>

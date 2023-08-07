@@ -34,7 +34,7 @@
                     </button>
                 </div>
             </div>
-            <form action="{{ url('dashboard/admin/pendaftaran') }}" method="POST">
+            <form action="{{ url('dashboard/admin/pendaftaran') }}" method="POST" enctype='multipart/form-data'>
                 @csrf
                 @method('POST')
                 <div class="card-body p-2">
@@ -71,7 +71,7 @@
                                                     <tr>
                                                         <td>
                                                             <div class="custom-control custom-radio">
-                                                                <input class="custom-control-input" type="radio" id="customRadio{{ base64_encode($item->id) }}" name="customRadioPilih" value="{{ $item->id }}">
+                                                                <input class="custom-control-input" type="radio" id="customRadio{{ $item->id }}" name="customRadioPilih" value="{{ base64_encode($item->id) }}">
                                                                 <label for="customRadio{{ $item->id }}" class="custom-control-label">Pilih</label>
                                                             </div>
                                                         </td>
@@ -98,7 +98,49 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="vert-tabs-unggah" role="tabpanel" aria-labelledby="vert-tabs-unggah-tab">
-                                    Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                                    <div class="card card-outline card-dark">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Form Unggah Surat Permohonan Diklat</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <p>- Ukuran file maksimal 512 KB <br>- Format file PDF</p>
+                                            <div class="form-group row">
+                                                <label for="tgl_surat_diklat" class="col-sm-3 col-form-label">Tanggal Surat</label>
+                                                <div class="col-sm-9">
+                                                    <input type="date" class="form-control @error('tgl_surat_diklat') is-invalid @enderror"
+                                                            id="tgl_surat_diklat" name="tgl_surat_diklat">
+                                                    @error('tgl_surat_diklat')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="no_surat_diklat" class="col-sm-3 col-form-label">No Surat</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control @error('no_surat_diklat') is-invalid @enderror"
+                                                            id="no_surat_diklat" name="no_surat_diklat" placeholder="Nomor surat permohonan diklat">
+                                                    @error('no_surat_diklat')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="surat_permohonan" class="col-sm-3 col-form-label">Unggah Dokumen PDF</label>
+                                                <div class="col-sm-9">
+                                                    <input type="file" class="form-control @error('surat_permohonan') is-invalid @enderror" name="surat_permohonan" id="surat_permohonan">
+                                                    @error('surat_permohonan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="vert-tabs-rincian" role="tabpanel" aria-labelledby="vert-tabs-rincian-tab">
                                     <div class="card card-outline card-dark">

@@ -77,13 +77,15 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($item->status_pendaftaran == 1)
+                                                @if ($item->status_pendaftaran == 0)
+                                                    <button class="btn btn-sm btn-secondary">Pending Peserta</button>
+                                                @elseif ($item->status_pendaftaran == 1)
                                                     <button class="btn btn-sm btn-danger">Aktif, belum lunas</button>
                                                 @elseif ($item->status_pendaftaran == 2)
                                                     <button class="btn btn-sm btn-success">Aktif, sudah lunas</button>
                                                 @elseif ($item->status_pendaftaran == 3)
                                                     <button class="btn btn-sm btn-primary">Selesai, sudah lunas</button>
-                                                @else
+                                                    @elseif ($item->status_pendaftaran == 4)
                                                     <button class="btn btn-sm btn-dark">Batal</button>
                                                 @endif
                                             </td>

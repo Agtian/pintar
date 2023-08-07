@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('m_daftar_mou_diklat', function (Blueprint $table) {
             $table->id();
             $table->string('no_surat', 100);
-            $table->string('no_mou', 100);
+            $table->string('no_mou', 100)->nullable();
             $table->date('tgl_mou');
             $table->string('bidang_kerjasama');
             $table->string('nama_instansi');
