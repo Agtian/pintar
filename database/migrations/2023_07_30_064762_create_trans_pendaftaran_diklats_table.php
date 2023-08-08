@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('t_pendaftaran_diklat', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('surat_diklat_id');
+            $table->unsignedBigInteger('surat_diklat_id')->nullable();
             $table->unsignedBigInteger('acara_diklat_id')->nullable();
             $table->string('kode_pendaftaran', 100);
             $table->integer('jumlah_peserta');

@@ -41,7 +41,7 @@
                     </button>
                 </div>
             </div>
-            <form action="{{ url('dashboard/admin/daftar-pelatihan') }}" method="POST">
+            <form action="{{ url('dashboard/admin/pendaftaran-pelatihan') }}" method="POST">
                 <div class="card-body">
                     @csrf
                     @method('POST')
@@ -162,8 +162,7 @@
                                                 <div class="col-sm-9">
                                                     <div class="input-group">
                                                         <input type="number" class="form-control @error('jumlah_peserta') is-invalid @enderror"
-                                                            id="jumlah_peserta" name="jumlah_peserta" placeholder="Jumlah peserta"
-                                                            value="{{ $detail->nama_diklat }}">
+                                                            id="jumlah_peserta" name="jumlah_peserta" placeholder="Jumlah peserta">
                                                         <span class="input-group-append">
                                                             <button type="button" class="btn btn-info" id="tampilkanForm">Tampilkan Form Biodata</button>
                                                             <button type="button" class="btn btn-primary" id="btn-tambah">Tambah Form</button>

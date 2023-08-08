@@ -289,4 +289,32 @@ class PendaftaranDiklatMOUController extends Controller
         return redirect('dashboard/admin/pendaftaran/'.base64_encode($insertPendaftaranDiklat['id']).'/resume')
                 ->with(['success' => 'Permohonan diklat berhasil di ajukan.']);
     }
+
+    public function kirimPermohonan(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id'  => 'required',
+        ]);
+
+        TransPendaftaranDiklat::findOrFail(base64_encode($validatedData['id']))->update([
+            'status_pendaftaran'    => 1,
+        ]);
+
+        return redirect('dashboard/admin/pendaftaran-diklat')
+                ->with(['success' => 'Permohonan diklat berhasil diajukan, harap tunggu 2x24 jam kami akan segera mengkonfirmasi permohonan anda. Terimakasih.']);
+    }
+
+    public function batalPermohonan(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id'  => 'required',
+        ]);
+        
+        TransPendaftaranDiklat::findOrFail(base64_encode($validatedData['id']))->update([
+            'status_pendaftaran'    => 4,
+        ]);
+
+        return redirect('dashboard/admin/pendaftaran-diklat')
+                ->with(['success' => 'Permohonan diklat telah dibatalkan, terimakasih.']);
+    }
 }
