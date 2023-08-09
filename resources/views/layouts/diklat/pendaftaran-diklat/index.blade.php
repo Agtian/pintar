@@ -45,6 +45,12 @@
                                     <h3 class="card-title">Form Surat Balasan</h3>
                                 </div>
                                 <div class="card-body">
+                                    <div class="text-muted mb-3">
+                                        <b>
+                                            *Isi form sesuai dengan surat masuk permohonan diklat. <br>
+                                            *Hasil akhir form surat balasan ini adalah print out surat balasan dari RSUD dr. Rehatta
+                                        </b>
+                                    </div>
                                     <div class="form-group row">
                                         <label for="no_surat_diklat" class="col-sm-3 col-form-label">No Surat Masuk</label>
                                         <div class="col-sm-9">
@@ -54,7 +60,30 @@
                                                     id="no_surat_diklat" name="no_surat_diklat" placeholder="No Surat Masuk"
                                                     value="{{ old('no_surat_diklat') }}">
                                                 <div class="input-group-prepend">
-                                                    <button type="button" class="btn btn-info">Info</button>
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#no_surat_diklat_modal">Info</button>
+                                                </div>
+                                                <div class="modal fade" id="no_surat_diklat_modal">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Cara input "No Surat Masuk"</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img class="card-img-top" src="{{ asset('assets/images/system/detail_nomor_surat_masuk.png') }}" alt="Card image cap">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title"><b>Perhatian !</b></h5>
+                                                                    <p class="card-text">Perhatikan contoh gambar diatas, kalimat yang ditandai warna merah. Di isi dengan <b>nomor surat masuk</b>.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @error('no_surat_diklat')
@@ -74,7 +103,30 @@
                                                     id="tgl_surat_diklat" name="tgl_surat_diklat"
                                                     placeholder="Tanggal Surat Masuk" value="{{ old('tgl_surat_diklat') }}">
                                                 <div class="input-group-prepend">
-                                                    <button type="button" class="btn btn-info">Info</button>
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tgl_surat_diklat_modal">Info</button>
+                                                </div>
+                                                <div class="modal fade" id="tgl_surat_diklat_modal">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Cara input "Tgl Surat Masuk"</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img class="card-img-top" src="{{ asset('assets/images/system/detail_tanggal_surat_masuk.png') }}" alt="Card image cap">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title"><b>Perhatian !</b></h5>
+                                                                    <p class="card-text">Perhatikan contoh gambar diatas, kalimat yang ditandai warna merah. Di isi dengan <b>tanggal surat masuk</b>.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @error('tgl_surat_diklat')
@@ -93,7 +145,30 @@
                                                     id="perihal" name="perihal" placeholder="Perihal"
                                                     value="{{ old('perihal') }}">
                                                 <div class="input-group-prepend">
-                                                    <button type="button" class="btn btn-info">Info</button>
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#perihal_modal">Info</button>
+                                                </div>
+                                                <div class="modal fade" id="perihal_modal">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Cara input "Perihal"</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img class="card-img-top" src="{{ asset('assets/images/system/detail_perihal.png') }}" alt="Cara input Perihal">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title"><b>Perhatian !</b></h5>
+                                                                    <p class="card-text">Perhatikan contoh diatas. Di isi dengan kalimat <b>"Persetujuan Ijin Praktek"</b> atau boleh juga ditambah dengan detail ijin prakteknya.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @error('perihal')
@@ -112,7 +187,30 @@
                                                     id="surat_dari" name="surat_dari" placeholder="Surat dari"
                                                     value="{{ old('surat_dari') }}">
                                                 <div class="input-group-prepend">
-                                                    <button type="button" class="btn btn-info">Info</button>
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#surat_dari_modal">Info</button>
+                                                </div>
+                                                <div class="modal fade" id="surat_dari_modal">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Cara input "Surat Dari"</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img class="card-img-top" src="{{ asset('assets/images/system/detail_surat_dari.png') }}" alt="Cara input Surat Dari">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title"><b>Perhatian !</b></h5>
+                                                                    <p class="card-text">Perhatikan contoh gambar diatas, kalimat yang digaris bawahi warna merah. Di isi dengan <b>nama fakultas atau jurusan, nama sekolah/universitas dan program pendidikannya</b>. Diwajibkan diisi dengan lengkap seperti contoh pada gambar tersebut !</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @error('surat_dari')
@@ -123,8 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="nama_instansi" class="col-sm-3 col-form-label">Nama Instansi /
-                                            Sekolah</label>
+                                        <label for="nama_instansi" class="col-sm-3 col-form-label">Nama Instansi / Sekolah</label>
                                         <div class="col-sm-9">
                                             <div class="input-group">
                                                 <input type="text"
@@ -154,7 +251,30 @@
                                                     placeholder="Kota instansi / sekolah / universitas"
                                                     value="{{ old('kota_instansi') }}">
                                                 <div class="input-group-prepend">
-                                                    <button type="button" class="btn btn-info">Info</button>
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kota_instansi_modal">Info</button>
+                                                </div>
+                                                <div class="modal fade" id="kota_instansi_modal">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Cara input "Kota Instansi / Sekolah"</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img class="card-img-top" src="{{ asset('assets/images/system/detail_alamat.png') }}" alt="Cara input Kota Instansi / Sekolah">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title"><b>Perhatian !</b></h5>
+                                                                    <p class="card-text">Perhatikan contoh diatas. Di isi dengan nama daerah/kota/kabupeten letak instansi pada surat.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @error('kota_instansi')
@@ -167,34 +287,21 @@
                                     <div class="form-group row">
                                         <label for="tgl_mulai" class="col-sm-3 col-form-label">Tanggal Mulai
                                             Diklat</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <input type="date"
+                                        <div class="col-sm-3">
+                                            <input type="date"
                                                     class="form-control @error('tgl_mulai') is-invalid @enderror"
                                                     id="tgl_mulai" name="tgl_mulai" value="{{ old('tgl_mulai') }}">
-                                                <div class="input-group-prepend">
-                                                    <button type="button" class="btn btn-info">Info</button>
-                                                </div>
-                                            </div>
                                             @error('tgl_mulai')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="tgl_akhir" class="col-sm-3 col-form-label">Tanggal Akhir
-                                            Diklat</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <input type="date"
+                                        <label for="tgl_akhir" class="col-form-label">s.d</label>
+                                        <div class="col-sm-3">
+                                            <input type="date"
                                                     class="form-control @error('tgl_akhir') is-invalid @enderror"
                                                     id="tgl_akhir" name="tgl_akhir" value="{{ old('tgl_akhir') }}">
-                                                <div class="input-group-prepend">
-                                                    <button type="button" class="btn btn-info">Info</button>
-                                                </div>
-                                            </div>
                                             @error('tgl_akhir')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -315,8 +422,8 @@
                                             <select name="opsi_honorarium" id="opsi_honorarium"
                                                 class="form-control @error('opsi_honorarium') is-invalid @enderror">
                                                 <option value="">-- Pilih biaya lainnya --</option>
-                                                <option value="ya" disabled>Dengan biaya honorarium CI</option>
-                                                <option value="tidak" selected>Tidak dengan biaya honorarium CI</option>
+                                                <option value="ya">Dengan biaya honorarium CI</option>
+                                                <option value="tidak">Tidak dengan biaya honorarium CI</option>
                                             </select>
                                             @error('opsi_honorarium')
                                                 <span class="invalid-feedback" role="alert">
