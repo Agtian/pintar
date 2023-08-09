@@ -109,7 +109,7 @@ class PendaftaranDiklatController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'no_surat_diklat'   => 'required|unique:t_surat_diklat,no_surat_diklat',
+            'no_surat_diklat'   => 'required',
             'tgl_surat_diklat'  => 'required|date',
             'perihal'           => 'required',
             'surat_dari'        => 'required',
@@ -133,11 +133,11 @@ class PendaftaranDiklatController extends Controller
         $queryTarifPreKlinik = MasterTarifPelatihanPreKlinik::where('status_tarif', 1)->get();
         
         if ($validatedData['jumlah_peserta_tambahan'] == 0) {
-            foreach ($queryTarifPreKlinik as $item) {
-                return $jumlah_tarif_pre_klinik = $item->jumlah_tarif;
-            }
+            $jumlah_tarif_pre_klinik = 0;
         } else {
-            $jumlah_tarif_pre_klinik = '';
+            foreach ($queryTarifPreKlinik as $item) {
+                $jumlah_tarif_pre_klinik = $item->jumlah_tarif;
+            }
         }
 
         $insertSuratDiklat = TransSuratDiklat::create([
@@ -157,9 +157,10 @@ class PendaftaranDiklatController extends Controller
             'surat_diklat_id'   => $insertSuratDiklat['id'],
             'kode_pendaftaran'  => $this->getAutoKode(),
             'jumlah_peserta'    => $validatedData['jumlah_peserta'],
-            'jumlah_perserta_tambahan' => $validatedData['jumlah_perserta_tambahan'],
+            'jumlah_peserta_tambahan' => $validatedData['jumlah_peserta_tambahan'],
             'tgl_mulai'         => $validatedData['tgl_mulai'],
             'tgl_akhir'         => $validatedData['tgl_akhir'],
+            'tgl_pendaftaran'   => date('Y-m-d H:i:s'),
             'status_pendaftaran'=> 1, // aktif, belum lunas
         ]);
 

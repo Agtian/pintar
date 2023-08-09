@@ -54,7 +54,7 @@
                                         <tr>
                                             <td align="center">
                                                 {{ $loop->iteration + $resultDaftarPeserta->firstItem() - 1 }}</td>
-                                            <td>{{ $item->nama_instansi }}</td>
+                                            <td>{{ $item->nama_instansi }} <br> <b> Tgl daftar : {{ date('d/m-Y', strtotime($item->tgl_pendaftaran)) }}</b></td>
                                             <td align="center">
                                                 {{ date('d/m/Y', strtotime($item->tgl_mulai)) }} <br>
                                                 s.d <br>
@@ -70,7 +70,10 @@
                                                     Total biaya Rp.
                                                     {{ number_format($item->total_tarif, 2, '.', ',') }}
                                                 @else
-                                                    {{ $item->nama_kegiatan . ' ' . $item->jenis_praktikan . ' Rp. ' . number_format($item->jumlah, 2, '.', ',') . ' x ' . $item->jumlah_peserta . ' orang x ' . $item->total_waktu . ' ' . $item->alias }}
+                                                    {{ $item->nama_kegiatan . ' ' . $item->jenis_praktikan . ' Rp. ' . number_format($item->jumlah, 2, '.', ',') . ' x ' . $item->jumlah_peserta . ' orang x ' . $item->total_waktu . ' ' . $item->alias }} <br>
+                                                    @if ($item->jumlah_peserta_tambahan > 0)
+                                                        Pelatihan Kompt. Dasar & Kredensial : Rp. {{ number_format($item->tarif_pre_klinik, 2, '.', ',') . ' x ' . $item->jumlah_peserta_tambahan }} orang
+                                                    @endif
                                                     <hr>
                                                     Total biaya Rp.
                                                     {{ number_format($item->total_tarif, 2, '.', ',') }}
@@ -97,8 +100,10 @@
                                                 <a href="{{ url('dashboard/admin/daftar-peserta/' . base64_encode($item->kode_pendaftaran) . '/edit') }}"
                                                     class="btn btn-sm btn-outline-warning m-1"><i
                                                         class="nav-icon fas fa-edit"></i></a>
-                                                <a href="" class="btn btn-sm btn-outline-danger m-1"><i
-                                                        class="nav-icon fas fa-trash-alt"></i></a>
+                                                <form action="{{ url('dashboard/admin/daftar-peserta/cancelRegister') }}" method="POST">
+                                                    <input type="hidden" name="id" value="{{ base64_encode($item->pendaftaran_diklat_id) }}">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger m-1"><i class="nav-icon fas fa-window-close"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @empty

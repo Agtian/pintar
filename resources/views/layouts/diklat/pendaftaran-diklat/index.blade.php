@@ -384,6 +384,9 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            <div class="text-muted">
+                                                    *Jika satuan kegiatan yang anda pilih adalah "PER KEGIATAN" maka kolom ini diisi 1.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -450,7 +453,7 @@
                                                 class="form-control @error('jumlah_peserta_tambahan') is-invalid @enderror"
                                                 id="jumlah_peserta_tambahan" name="jumlah_peserta_tambahan"
                                                 placeholder="Jumlah perserta tambahan"
-                                                value="{{ old('jumlah_peserta_tambahan') }}">
+                                                value="0">
                                             @error('jumlah_peserta_tambahan')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

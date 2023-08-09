@@ -393,10 +393,10 @@
                                                                         class="form-control @error('opsi_honorarium') is-invalid @enderror">
                                                                         <option value="">-- Pilih biaya lainnya --
                                                                         </option>
-                                                                        <option value="ya" disabled>Dengan biaya
+                                                                        <option value="ya">Dengan biaya
                                                                             honorarium CI
                                                                         </option>
-                                                                        <option value="tidak" selected>Tidak dengan biaya
+                                                                        <option value="tidak">Tidak dengan biaya
                                                                             honorarium
                                                                             CI</option>
                                                                     </select>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('jasa_sarana');
             $table->bigInteger('jasa_lainnya');
             $table->bigInteger('tarif_honorarium')->default('0');
+            $table->integer('jumlah_peserta_tambahan')->default('0');
             $table->integer('jumlah_peserta');
             $table->integer('total_waktu')->default('0');
             $table->bigInteger('tarif_pre_klinik')->default('0');
