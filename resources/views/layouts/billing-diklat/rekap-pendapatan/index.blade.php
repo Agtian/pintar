@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Data Rekap Pendapatan/h1>
+                    <h1 class="m-0">Data Rekap Pendapatan</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -37,7 +37,46 @@
                 </div>
             </div>
             <div class="card-body p-0">
-                ...
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-secondary">
+                                        <th>NO</th>
+                                        <th>TANGGAL</th>
+                                        <th>NAMA</th>
+                                        <th>RINCIAN BIAYA</th>
+                                        <th>TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($resultRekapPendapatan as $item)
+                                        <tr>
+                                            <td width="50" rowspan="2" align="center">
+                                                {{ $loop->iteration + $resultRekapPendapatan->firstItem() - 1 }}
+                                            </td>
+                                            <td rowspan="2">{{ date('d/m/Y H:i', strtotime($item->updated_at)) }}</td>
+                                            <td rowspan="2">{{ optional($item->suratDiklat)->nama_instansi }}</td>
+                                            <td>
+                                                {{ $item->tarifDiklat->get_jenis_kegiatan }}
+                                            </td>
+                                            <td rowspan="2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4">Data tidak tersedia !</td>
+                                        </tr>
+                                    @endforelse
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-footer clearfix">
                 ...

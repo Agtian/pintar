@@ -12,4 +12,9 @@ class TransPendaftaranDiklat extends Model
     protected $table = 't_pendaftaran_diklat';
 
     protected $guarded = [];
+
+    public function pendapatanDiklat()
+    {
+        return $this->hasMany(TransPendapatanDiklat::class, 'id', 'id');
+    }
 }
