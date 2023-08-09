@@ -131,9 +131,13 @@ class PendaftaranDiklatController extends Controller
         ]);
 
         $queryTarifPreKlinik = MasterTarifPelatihanPreKlinik::where('status_tarif', 1)->get();
-        $jumlah_tarif_pre_klinik = '';
-        foreach ($queryTarifPreKlinik as $item) {
-            $jumlah_tarif_pre_klinik = $item->jumlah_tarif;
+        
+        if ($validatedData['jumlah_peserta_tambahan'] == 0) {
+            foreach ($queryTarifPreKlinik as $item) {
+                return $jumlah_tarif_pre_klinik = $item->jumlah_tarif;
+            }
+        } else {
+            $jumlah_tarif_pre_klinik = '';
         }
 
         $insertSuratDiklat = TransSuratDiklat::create([
