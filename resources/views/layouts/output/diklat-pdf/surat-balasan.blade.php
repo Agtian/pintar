@@ -65,7 +65,7 @@
             <td>
                 <ol>
                     <li>{{ $detail->nama_kegiatan }} dilaksanakan Tanggal
-                        {{ date('d F', strtotime($detail->tgl_mulai)) . ' s.d ' . date('d F', strtotime($detail->tgl_akhir)) }}.
+                        {{ date('d F', strtotime($detail->tgl_mulai)) . ' s.d ' . date('d F Y', strtotime($detail->tgl_akhir)) }}.
                     </li>
                     <li>Peserta {{ strtolower($detail->nama_kegiatan) }} berjumlah
                         {{ $detail->jumlah_peserta }} orang.</li>
@@ -76,41 +76,41 @@
                                 <table style="margin-left= 600px;">
                                     @if ($detail['tarif_honorarium'] == 0)
                                         <tr>
-                                            <td width="280">- Biaya {{ $detail->nama_kegiatan }} Rp
+                                            <td width="280">- Biaya {{ $detail->nama_kegiatan }} Rp.
                                                 {{ number_format($detail->jumlah, 2, ',', '.') }} <b>*</b>
                                                 {{ $detail->jumlah_peserta }} Org <b>*</b>
                                                 {{ $detail->total_waktu . ' ' . $detail->alias }}</td>
-                                            <td> = Rp {{ number_format($detail->total_tarif, 2, ',', '.') }}</td>
+                                            <td> = Rp. {{ number_format($detail->total_tarif, 2, ',', '.') }}</td>
                                         </tr>
                                         <tr>
                                             <td width="280"> &nbsp;Total biaya</td>
-                                            <td> = Rp {{ number_format($detail->total_tarif, 2, ',', '.') }}</td>
+                                            <td> = Rp. {{ number_format($detail->total_tarif, 2, ',', '.') }}</td>
                                         </tr>
                                     @else
                                         <tr>
-                                            <td width="280">- Biaya Honorarium, CI Rp.
+                                            <td width="280">- Biaya {{ $detail->nama_kegiatan }} Rp.
                                                 {{ number_format($detail->jumlah, 2, ',', '.') }}
                                                 <b>*</b>
                                                 {{ $detail->jumlah_peserta }} Org <b>*</b>
                                                 {{ $detail->total_waktu . ' ' . $detail->alias }}
                                             </td>
-                                            <td> = Rp
+                                            <td> = Rp.
                                                 {{ number_format($detail->jumlah * $detail->jumlah_peserta * $detail->total_waktu, 2, ',', '.') }}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="280">- Biaya Honorarium, CI Rp
+                                            <td width="280">- Biaya Honorarium CI Rp.
                                                 {{ number_format($detail->tarif_honorarium, 2, ',', '.') }} <b>*</b>
                                                 {{ $detail->jumlah_peserta }} Org <b>*</b>
                                                 {{ $detail->total_waktu . ' ' . $detail->alias }}
                                             </td>
-                                            <td> = Rp
+                                            <td> = Rp.
                                                 {{ number_format($detail->tarif_honorarium * $detail->jumlah_peserta * $detail->total_waktu, 2, ',', '.') }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td width="280"> &nbsp;Total biaya</td>
-                                            <td> = Rp. {{ $detail->total_tarif }}</td>
+                                            <td> = Rp. {{ number_format($detail->total_tarif, 2, ',', '.') }}</td>
                                         </tr>
                                     @endif
                                 </table>
