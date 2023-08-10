@@ -85,7 +85,7 @@
                 <li class="nav-header">BILLING DIKLAT</li>
                 <li class="nav-item">
                     <a href="{{ url('dashboard/admin/rekap-pendapatan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/rekap-pendapatan') ? 'active bg-primary' : '' }}">
+                        class="nav-link {{ request()->is('dashboard/admin/rekap-pendapatan') || request()->is('dashboard/admin/rekap-pendapatan/filter') ? 'active bg-primary' : '' }}">
                         <i class="nav-icon fas fa-file-prescription"></i>
                         <p class="text">Rekap Pendapatan</p>
                     </a>

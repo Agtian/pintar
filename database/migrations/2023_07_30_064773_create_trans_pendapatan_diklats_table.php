@@ -27,6 +27,7 @@ return new class extends Migration
             $table->bigInteger('tarif_pre_klinik')->default('0');
             $table->bigInteger('total_tarif');
             $table->tinyInteger('f_status')->default('0')->comment('0=belum_lunas,1=lunas,2=batal,3=pending_peserta');
+            $table->dateTime('tgl_bayar')->nullable();
             $table->timestamps();
 
             $table->foreign('pendaftaran_diklat_id')->references('id')->on('t_pendaftaran_diklat')->onDelete('cascade');

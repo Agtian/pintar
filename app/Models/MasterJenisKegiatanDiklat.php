@@ -9,7 +9,7 @@ class MasterJenisKegiatanDiklat extends Model
 {
     use HasFactory;
 
-    protected $table = 'm_jenis_kegiatan';
+    public $table = 'm_jenis_kegiatan';
 
     protected $guarded = [];
 

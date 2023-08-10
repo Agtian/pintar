@@ -9,7 +9,7 @@ class MasterTarifDiklat extends Model
 {
     use HasFactory;
 
-    protected $table = 'm_tarif_diklat';
+    public $table = 'm_tarif_diklat';
 
     protected $guarded = [];
 

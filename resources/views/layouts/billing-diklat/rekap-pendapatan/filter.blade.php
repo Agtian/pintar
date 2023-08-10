@@ -1,3 +1,10 @@
+@push('style')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+@endpush
+
 @extends('layouts.app')
 
 @section('content')
@@ -98,9 +105,24 @@
             </div>
             <div class="card-body p-0">
                 <div class="row">
+                    <div class="col-sm-12">
+                        <blockquote class="quote-secondary">
+                            <table>
+                                <tr>
+                                    <td width="80">Periode</td>
+                                    <td>: {{ $tgl_awal. ' s.d '.$tgl_akhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td width="80">Status Bill</td>
+                                    <td>: {{ $status_bill }}</td>
+                                </tr>
+                            </table>
+                        </blockquote>
+                        <hr>
+                    </div>
                     <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive p-2">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="bg-secondary">
                                         <th>NO</th>
@@ -113,11 +135,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
                                     @forelse ($resultRekapPendapatan as $item)
                                         <tr>
-                                            <td width="50" align="center">
-                                                {{ $loop->iteration + $resultRekapPendapatan->firstItem() - 1 }}
-                                            </td>
+                                            <td width="50" align="center">{{ $no++ }}</td>
                                             <td>
                                                 Reg : {{ date('d/m/Y H:i', strtotime($item->tgl_pendaftaran)) }} <br>
                                                 User Reg : {{ $item->name_reg == null ? '-' : substr($item->name_reg, 0, 10).'...' }} <br>
@@ -187,9 +210,42 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer clearfix">
-                {{ $resultRekapPendapatan->links() }}
-            </div>
         </div>
     </section>
 @endsection
+
+@push('script')
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, 
+                "lengthChange": true, // false
+                "autoWidth": true, // false
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+@endpush

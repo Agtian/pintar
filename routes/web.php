@@ -193,6 +193,7 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/rekap-pendapatan', 'index');
         Route::get('/rekap-pendapatan/create', 'create');
         Route::post('/rekap-pendapatan', 'store');
+        Route::post('/rekap-pendapatan/filter', 'filter');
         Route::get('/rekap-pendapatan/{rekappendapatan}/edit', 'edit');
         Route::put('/rekap-pendapatan/{rekappendapatan}', 'update');
         Route::get('/rekap-pendapatan/{rekappendapatan}/delete', 'destroy');

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('satuan_kegiatan_id');
             $table->unsignedBigInteger('jenis_praktikan_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('no_pergub_tarif')->nullable();
             $table->bigInteger('jasa_sarana');
             $table->bigInteger('jasa_lainnya');
             $table->bigInteger('jumlah');
