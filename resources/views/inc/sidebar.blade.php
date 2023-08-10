@@ -34,56 +34,82 @@
                     </a>
                 </li>
 
-                <li class="nav-header">PENDAFTARAN DIKLAT</li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/pendaftaran-diklat') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/pendaftaran-diklat') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p class="text">Pendaftaran Peserta</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/pendaftaran') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/pendaftaran') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon far fa-edit"></i>
-                        <p class="text">Pend. Peserta (MOU)</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/daftar-peserta') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/daftar-peserta') || request()->segment(3) == 'daftar-peserta' ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-chalkboard-teacher"></i>
-                        <p class="text">Daftar Peserta</p>
-                    </a>
-                </li>
+                @if (Auth::user()->role_as != 3 || Auth::user()->role_as != 4)
+                    <li class="nav-header">PENDAFTARAN DIKLAT</li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/pendaftaran-diklat') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/pendaftaran-diklat') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p class="text">Pendaftaran Peserta</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/pendaftaran') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/pendaftaran') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon far fa-edit"></i>
+                            <p class="text">Pend. Peserta (MOU)</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/daftar-peserta') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/daftar-peserta') || request()->segment(3) == 'daftar-peserta' ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                            <p class="text">Daftar Peserta</p>
+                        </a>
+                    </li>
+                @endif
 
-                <li class="nav-header">PENDAFTARAN PELATIHAN</li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/pendaftaran-pelatihan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/pendaftaran-pelatihan') || request()->segment(4) == 'registrasi' || request()->segment(4) == 'pembayaran' ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p class="text">Pendaftaran Peserta</p>
-                    </a>
-                </li>
+                @if (Auth::user()->role_as == 1 ||Auth::user()->role_as == 3)
+                    <li class="nav-header">PENDAFTARAN DIKLAT</li>
+                    <li class="nav-item">
+                        <a href=""
+                            class="nav-link">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p class="text">Pendaftaran Peserta</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href=""
+                            class="nav-link">
+                            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                            <p class="text">Daftar Peserta</p>
+                        </a>
+                    </li>
+                @endif
+                
+                @if (Auth::user()->role_as == 0 || Auth::user()->role_as == 1)
+                    <li class="nav-header">PENDAFTARAN PELATIHAN</li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/pendaftaran-pelatihan') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/pendaftaran-pelatihan') || request()->segment(4) == 'registrasi' || request()->segment(4) == 'pembayaran' ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p class="text">Pendaftaran Peserta</p>
+                        </a>
+                    </li>
+                
 
-                <li class="nav-header">KELOLA PELATIHAN</li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/daftar-pelatihan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/daftar-pelatihan') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fab fa-buromobelexperte"></i>
-                        <p class="text">Daftar Pelatihan</p>
-                    </a>
-                </li>
+                    <li class="nav-header">KELOLA PELATIHAN</li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/daftar-pelatihan') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/daftar-pelatihan') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fab fa-buromobelexperte"></i>
+                            <p class="text">Daftar Pelatihan</p>
+                        </a>
+                    </li>
+                @endif
 
-                <li class="nav-header">BILLING DIKLAT</li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/rekap-pendapatan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/rekap-pendapatan') || request()->is('dashboard/admin/rekap-pendapatan/filter') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-file-prescription"></i>
-                        <p class="text">Rekap Pendapatan</p>
-                    </a>
-                </li>
+                @if (Auth::user()->role_as == 1 || Auth::user()->role_as == 2)
+                    <li class="nav-header">BILLING DIKLAT</li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/rekap-pendapatan') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/rekap-pendapatan') || request()->is('dashboard/admin/rekap-pendapatan/filter') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-file-prescription"></i>
+                            <p class="text">Rekap Pendapatan</p>
+                        </a>
+                    </li>
+                @endif
 
+                @if (Auth::user()->role_as == 1)
                 <li class="nav-header">MASTER</li>
                 <li class="nav-item">
                     <a href="{{ url('dashboard/admin/user') }}"
@@ -155,8 +181,9 @@
                         <p>Unit Kerja</p>
                     </a>
                 </li>
+                @endif
                 <br>
-                
+
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"
                         onclick="event.preventDefault();
