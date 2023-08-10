@@ -59,24 +59,22 @@
                     </li>
                 @endif
 
-                @if (Auth::user()->role_as == 1 ||Auth::user()->role_as == 3)
+                @if (Auth::user()->role_as == 1 || Auth::user()->role_as == 3)
                     <li class="nav-header">PENDAFTARAN DIKLAT</li>
                     <li class="nav-item">
-                        <a href=""
-                            class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p class="text">Pendaftaran Peserta</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href=""
-                            class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="nav-icon fas fa-chalkboard-teacher"></i>
                             <p class="text">Daftar Peserta</p>
                         </a>
                     </li>
                 @endif
-                
+
                 @if (Auth::user()->role_as == 0 || Auth::user()->role_as == 1)
                     <li class="nav-header">PENDAFTARAN PELATIHAN</li>
                     <li class="nav-item">
@@ -86,7 +84,7 @@
                             <p class="text">Pendaftaran Peserta</p>
                         </a>
                     </li>
-                
+
 
                     <li class="nav-header">KELOLA PELATIHAN</li>
                     <li class="nav-item">
@@ -110,77 +108,77 @@
                 @endif
 
                 @if (Auth::user()->role_as == 1)
-                <li class="nav-header">MASTER</li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/user') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/user') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p class="text">Users</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-pegawai') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-pegawai') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>Pegawai</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-daftar-mou') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-daftar-mou') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-handshake"></i>
-                        <p>Daftar MOU</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-honorarium') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-honorarium') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-funnel-dollar"></i>
-                        <p>Tarif Honorarium</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-tarif-pelatihan-pre-klinik') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-tarif-pelatihan-pre-klinik') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-comment-dollar"></i>
-                        <p>Tarif Pelatihan Pre Klinik</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-tarif-diklat') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-tarif-diklat') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-dollar-sign"></i>
-                        <p>Tarif Diklat</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-jenis-kegiatan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-jenis-kegiatan') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fab fa-stumbleupon-circle"></i>
-                        <p>Jenis Kegiatan Diklat</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-jenis-praktikan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-jenis-praktikan') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fab fa-stumbleupon"></i>
-                        <p>Jenis Praktikan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-satuan-kegiatan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-satuan-kegiatan') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-business-time"></i>
-                        <p>Satuan Kegiatan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/master-unit-kerja') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/master-unit-kerja') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-universal-access"></i>
-                        <p>Unit Kerja</p>
-                    </a>
-                </li>
+                    <li class="nav-header">MASTER</li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/user') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/user') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p class="text">Users</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-pegawai') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-pegawai') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>Pegawai</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-daftar-mou') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-daftar-mou') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-handshake"></i>
+                            <p>Daftar MOU</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-honorarium') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-honorarium') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-funnel-dollar"></i>
+                            <p>Tarif Honorarium</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-tarif-pelatihan-pre-klinik') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-tarif-pelatihan-pre-klinik') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-comment-dollar"></i>
+                            <p>Tarif Pelatihan Pre Klinik</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-tarif-diklat') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-tarif-diklat') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-dollar-sign"></i>
+                            <p>Tarif Diklat</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-jenis-kegiatan') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-jenis-kegiatan') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fab fa-stumbleupon-circle"></i>
+                            <p>Jenis Kegiatan Diklat</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-jenis-praktikan') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-jenis-praktikan') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fab fa-stumbleupon"></i>
+                            <p>Jenis Praktikan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-satuan-kegiatan') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-satuan-kegiatan') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-business-time"></i>
+                            <p>Satuan Kegiatan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('dashboard/admin/master-unit-kerja') }}"
+                            class="nav-link {{ request()->is('dashboard/admin/master-unit-kerja') ? 'active bg-primary' : '' }}">
+                            <i class="nav-icon fas fa-universal-access"></i>
+                            <p>Unit Kerja</p>
+                        </a>
+                    </li>
                 @endif
                 <br>
 

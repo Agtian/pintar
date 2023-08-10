@@ -18,6 +18,7 @@ use App\Http\Controllers\Master\SatuanKegiatan\SatuanKegiatanController;
 use App\Http\Controllers\Master\TarifDiklat\TarifDiklatController;
 use App\Http\Controllers\Master\TarifPelatihanPreKlinik\TarifPelatihanPreKlinikController;
 use App\Http\Controllers\Master\UnitKerja\UnitKerjaController;
+use App\Http\Controllers\Output\PrintOut\PdfDiklatController;
 use App\Http\Controllers\Pelatihan\PendaftaranPelatihanController;
 use App\Http\Controllers\SystemController\DropdownController;
 use Illuminate\Support\Facades\Route;
@@ -208,5 +209,16 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/daftar-pelatihan/{daftarpelatihan}/edit', 'edit');
         Route::put('/daftar-pelatihan/{daftarpelatihan}', 'update');
         Route::get('/daftar-pelatihan/{daftarpelatihan}/delete', 'destroy');
+    });
+
+    Route::controller(PdfDiklatController::class)->group(function () {
+        Route::get('/printout-diklat', 'index');
+        Route::get('/printout-diklat/create', 'create');
+        Route::post('/printout-diklat', 'store');
+        Route::get('/printout-diklat/{kode}/edit', 'edit');
+        Route::put('/printout-diklat/{kode}', 'update');
+        Route::get('/printout-diklat/{kode}/delete', 'destroy');
+        
+        Route::get('/printout-diklat/surat-balasan/{kode}/pdf', 'suratBalasan');
     });
 });
