@@ -162,15 +162,6 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/pendaftaran/{pendaftaran}/delete', 'destroy');
     });
 
-    Route::controller(SuratBalasanController::class)->group(function () {
-        Route::get('/surat-balasan', 'index');
-        Route::get('/surat-balasan/create', 'create');
-        Route::post('/surat-balasan', 'store');
-        Route::get('/surat-balasan/{suratbalasan}/edit', 'edit');
-        Route::put('/surat-balasan/{suratbalasan}', 'update');
-        Route::get('/surat-balasan/{suratbalasan}/delete', 'destroy');
-    });
-
     Route::controller(DaftarPesertaController::class)->group(function () {
         Route::get('/daftar-peserta', 'index');
         Route::get('/daftar-peserta/create', 'create');

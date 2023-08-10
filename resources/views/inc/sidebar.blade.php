@@ -50,13 +50,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('dashboard/admin/surat-balasan') }}"
-                        class="nav-link {{ request()->is('dashboard/admin/surat-balasan') ? 'active bg-primary' : '' }}">
-                        <i class="nav-icon fas fa-mail-bulk"></i>
-                        <p class="text">Surat Balasan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ url('dashboard/admin/daftar-peserta') }}"
                         class="nav-link {{ request()->is('dashboard/admin/daftar-peserta') || request()->segment(3) == 'daftar-peserta' ? 'active bg-primary' : '' }}">
                         <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -163,40 +156,7 @@
                     </a>
                 </li>
                 <br>
-                <li class="nav-item {{ request()->segment(1) == 'dashboard' ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('dashboard/dashboard-v1') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ url('dashboard/dashboard-v1') }}"
-                                class="nav-link {{ request()->is('dashboard/dashboard-v1') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v1</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('dashboard/dashboard-v2') }}"
-                                class="nav-link {{ request()->is('dashboard/dashboard-v2') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v2</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('dashboard/dashboard-v3') }}"
-                                class="nav-link {{ request()->is('dashboard/dashboard-v3') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v3</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <br>
+                
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"
                         onclick="event.preventDefault();
