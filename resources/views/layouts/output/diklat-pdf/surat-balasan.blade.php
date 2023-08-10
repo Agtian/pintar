@@ -52,7 +52,7 @@
             <td width="20"></td>
             <td width="490" style="text-align: justify; text-justify:
             inter-word;">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Memperhatikan surat dari {{ $detail->kota_instansi }}
+                &nbsp; Memperhatikan surat dari {{ $detail->nama_instansi }}
                 Nomor {{ $detail->no_surat_diklat }} tanggal
                 {{ date('d F Y', strtotime($detail->tgl_surat_diklat)) }}, perihal
                 {{ $detail->perihal }}, pada prinsipnya kami menyetujui RSUD Kelet Provinsi Jawa Tengah sebagai tempat
