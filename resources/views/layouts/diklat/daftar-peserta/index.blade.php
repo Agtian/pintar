@@ -173,6 +173,8 @@
                                         Diklat</a>
                                     <a href="{{ url('dashboard/admin/printout-diklat/surat-balasan/' . base64_encode($item->pendaftaran_diklat_id) . '/pdf') }}"
                                         class="btn btn-sm btn-primary" target="_blank">Surat Balasan</a>
+                                    <a href="{{ url('dashboard/admin/printout-diklat/surat-balasan-i/' . base64_encode($item->pendaftaran_diklat_id) . '/pdf') }}"
+                                            class="btn btn-sm btn-primary" target="_blank">Surat Balasan</a>
                                     <a href="" class="btn btn-sm btn-primary" target="_blank">Retribusi</a>
                                 </td>
                             </tr>

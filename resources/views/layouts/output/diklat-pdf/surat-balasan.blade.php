@@ -1,11 +1,12 @@
 <style>
     .print {
         font-family: "Times New Roman", Times, serif;
+        font-size: 11pt;
     }
 </style>
 
 <div class="print">
-    <img src="assets/image_akun/kop_surat.png" alt="Kop Surat">
+    <img src="assets/images/system/kop_surat.png" alt="Kop Surat">
 
     <table>
         <tr>
@@ -67,8 +68,7 @@
                     <li>{{ $detail->nama_kegiatan }} dilaksanakan Tanggal
                         {{ date('d F', strtotime($detail->tgl_mulai)) . ' s.d ' . date('d F Y', strtotime($detail->tgl_akhir)) }}.
                     </li>
-                    <li>Peserta {{ strtolower($detail->nama_kegiatan) }} berjumlah
-                        {{ $detail->jumlah_peserta }} orang.</li>
+                    <li>Peserta {{ strtolower($detail->nama_kegiatan) }} berjumlah {{ $detail->jumlah_peserta }} orang.</li>
                     <li>Biaya administrasi {{ strtolower($detail->nama_kegiatan) }}, dan sesuai Peraturan Gubernur Jawa
                         Tengah Nomor : 58 Tahun 2020, dengan rincian :
                         <ul style="list-style-type:none;">

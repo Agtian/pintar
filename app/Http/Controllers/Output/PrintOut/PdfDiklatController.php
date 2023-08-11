@@ -16,10 +16,25 @@ class PdfDiklatController extends Controller
             'detail'    => (new TransSuratDiklat())->getDetailSuratBalasan(base64_decode($kode))
         ]);
         
-        PDF::SetTitle('Hello World');
-        PDF::AddPage();
-        PDF::writeHTML($html, true, false, true, false, '');
+        $nameFile = date('Ymd', strtotime($html['detail']->tgl_pendaftaran))." Surat Balasan ".$html['detail']->nama_instansi;
 
-        PDF::Output('hello_world.pdf');
+        PDF::SetTitle($nameFile);
+        PDF::AddPage('P', [215,330]);
+        PDF::writeHTML($html, true, false, true, false, '');
+        PDF::Output("$nameFile.pdf");
+    }
+
+    public function suratBalasanV1($kode)
+    {
+        $html = view('layouts.output.diklat-pdf.surat-balasan-v-i')->with([
+            'detail'    => (new TransSuratDiklat())->getDetailSuratBalasan(base64_decode($kode))
+        ]);
+        
+        $nameFile = date('Ymd', strtotime($html['detail']->tgl_pendaftaran))." Surat Balasan ".$html['detail']->nama_instansi;
+
+        PDF::SetTitle($nameFile);
+        PDF::AddPage('P', [215,330]);
+        PDF::writeHTML($html, true, false, true, false, '');
+        PDF::Output("$nameFile.pdf");
     }
 }
