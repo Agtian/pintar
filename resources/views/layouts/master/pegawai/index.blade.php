@@ -36,11 +36,8 @@
                     </button>
                 </div>
             </div>
-            <div class="card-body p-0">
-                ...
-            </div>
-            <div class="card-footer clearfix">
-                ...
+            <div>
+                <livewire:master.kepegawaian.table-data-pegawai />
             </div>
         </div>
     </section>

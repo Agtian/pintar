@@ -21,6 +21,7 @@ use App\Http\Controllers\Master\UnitKerja\UnitKerjaController;
 use App\Http\Controllers\Output\PrintOut\PdfDiklatController;
 use App\Http\Controllers\Pelatihan\PendaftaranPelatihanController;
 use App\Http\Controllers\SystemController\DropdownController;
+use App\Http\Controllers\SystemController\GetDataController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,7 @@ Route::get('/home-dashboard', [HomeDashboard::class, 'index'])->name('home-dashb
 Route::post('api/fetch-satuan-kegiatan-diklat', [DropdownController::class, 'getSatuanKegiatan']);
 Route::post('api/fetch-jenis-praktikan-diklat', [DropdownController::class, 'getJenisPraktikan']);
 Route::get('api/fetch-table-peserta-diklat/{kode}/result', [DropdownController::class, 'getTablePesertaDiklat']);
+Route::get('api/fetch-get-pegawai/{search}', [GetDataController::class, 'getSelectPegawais']);
 
 Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(function () {
 

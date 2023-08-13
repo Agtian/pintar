@@ -1,3 +1,8 @@
+@push('style')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endpush
+
 @extends('layouts.app')
 
 @section('content')
@@ -42,6 +47,22 @@
                         @csrf
 
                         <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nama Pegawai</label>
+                                <div class="col-sm-9">
+                                    <div class="select2-purple">
+                                        <select class="form-control" id="select-pegawai" name="pegawai_id[]"
+                                            multiple="multiple" data-placeholder="Select a State"
+                                            data-dropdown-css-class="select2-purple" style="width: 100%;"></select>
+                                    </div>
+                                    @error('pegawai_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="name" class="col-sm-3 col-form-label">Name</label>
                                 <div class="col-sm-9">
@@ -109,3 +130,32 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#select-pegawai').select2({
+                theme: 'bootstrap4',
+                allowClear: true,
+                placeholder: 'Cari nama pegawai',
+                ajax: {
+                    dataType: 'json',
+                    url: {{ url('api/fetch-get-pegawai') }},
+                    delay: 800,
+                    data: function(params) {
+                        return {
+                            search: params.term
+                        }
+                    },
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
+        });
+    </script>
+@endpush
