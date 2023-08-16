@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MasterPegawaiTemp;
+use App\Models\PGSQL\MasterPegawai;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,16 +25,45 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name'      => 'required',
+            'pegawai_id'=> 'required',
             'email'     => 'required|unique:users',
             'password'  => 'required|string|min:8|confirmed',
             'role_as'   => 'required',
         ]);
 
-        User::create([
-            'name'      => $validatedData['name'],
+        $insertUsers = User::create([
+            'name'      => $validatedData['pegawai_id'],
             'email'     => $validatedData['email'],
             'password'  => Hash::make($validatedData['password']),
+            'role_as'   => $validatedData['role_as'],
+            'status_user' => 1
+        ]);
+
+        $getPegawai = (new MasterPegawai())->getSearchPegawai($validatedData['pegawai_id']);
+
+        MasterPegawaiTemp::create([
+            'pegawai_id'            => $getPegawai->pegawai_id,
+            'gelardepan'            => $getPegawai->gelardepan,
+            'nama_pegawai'          => $getPegawai->nama_pegawai,
+            'gelarbelakang_nama'    => $getPegawai->gelarbelakang_nama,
+            'nomorindukpegawai'     => $getPegawai->nomorindukpegawai,
+            'jeniskelamin'          => $getPegawai->jeniskelamin,
+            'tempatlahir_pegawai'   => $getPegawai->tempatlahir_pegawai,
+            'tgl_lahirpegawai'      => $getPegawai->tgl_lahirpegawai,
+            'pegawai_aktif'         => $getPegawai->pegawai_aktif,
+            'agama'                 => $getPegawai->agama,
+            'golongandarah'         => $getPegawai->golongandarah,
+            'alamatemail'           => $getPegawai->alamatemail,
+            'notelp_pegawai'        => $getPegawai->notelp_pegawai,
+            'nomobile_pegawai'      => $getPegawai->nomobile_pegawai,
+            'photopegawai'          => $getPegawai->photopegawai,
+            'namaunitkerja'         => $getPegawai->namaunitkerja,
+            'pendidikan_nama'       => $getPegawai->pendidikan_nama,
+            'jabatan_nama'          => $getPegawai->jabatan_nama,
+            'pangkat_nama'          => $getPegawai->pangkat_nama,
+            'pendkualifikasi_nama'  => $getPegawai->pendkualifikasi_nama,
+            'golonganpegawai_nama'  => $getPegawai->golonganpegawai_nama,
+            'kelompokpegawai_nama'  => $getPegawai->kelompokpegawai_nama,
         ]);
 
         return redirect('dashboard/admin/user/create')->with('message', 'User added successfully.');
@@ -66,8 +97,15 @@ class UserController extends Controller
 
     public function destroy(int $user_id)
     {
-        $user = User::findOrFail($user_id);
+        $user = User::findOrFail($user_id)->update([
+            'status_user'   => 0
+        ]);
+        
+        MasterPegawaiTemp::where('nama_pegawai', $user->nama_pegawai)->update([
+            'status_user'   => 0
+        ]);
         $user->delete();
+
         return redirect()->back()->with('message', 'User deleted successfully.');
     }
 }

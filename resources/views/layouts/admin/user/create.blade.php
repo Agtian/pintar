@@ -1,4 +1,5 @@
 @push('style')
+    <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endpush
@@ -50,11 +51,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Nama Pegawai</label>
                                 <div class="col-sm-9">
-                                    <div class="select2-purple">
-                                        <select class="form-control" id="select-pegawai" name="pegawai_id[]"
-                                            multiple="multiple" data-placeholder="Select a State"
-                                            data-dropdown-css-class="select2-purple" style="width: 100%;"></select>
-                                    </div>
+                                    <select class="form-control" id="select_pegawais" name="pegawai_id"></select>
                                     @error('pegawai_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -64,22 +61,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-3 col-form-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        id="name" name="name" placeholder="Name">
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                                 <div class="col-sm-9">
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        id="email" name="email" placeholder="Email">
+                                        id="email" name="email" value="{{ old('email') }}" placeholder="Email">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -109,12 +94,14 @@
                             </div>
                             <div class="form-group row">
                                 <label for="role_as"
-                                    class="col-sm-3 col-form-label @error('role_as') is-invalid @enderror">Confirm
-                                    Password</label>
+                                    class="col-sm-3 col-form-label @error('role_as') is-invalid @enderror">Role As</label>
                                 <div class="col-sm-9">
                                     <select name="role_as" id="role_as" class="form-control">
-                                        <option value="0">User</option>
-                                        <option value="1">Admin</option>
+                                        <option value="0">Petugas Diklat</option>
+                                        <option value="1">Administrator</option>
+                                        <option value="2">Kasir</option>
+                                        <option value="3">Peserta MOU</option>
+                                        <option value="4">Peserta Diklat</option>
                                     </select>
                                 </div>
                             </div>
@@ -134,28 +121,32 @@
 @push('script')
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#select-pegawai').select2({
+    <script type="text/javascript">
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function(){
+            $("#select_pegawais" ).select2({
                 theme: 'bootstrap4',
-                allowClear: true,
-                placeholder: 'Cari nama pegawai',
-                ajax: {
+                // closeOnSelect: true,
+                ajax: { 
+                    url: "{{ url('/api/fetch-get-pegawai') }}",
+                    type: "GET",
                     dataType: 'json',
-                    url: {{ url('api/fetch-get-pegawai') }},
-                    delay: 800,
-                    data: function(params) {
+                    delay: 250,
+                    data: function (params) {
                         return {
+                            _token: CSRF_TOKEN,
                             search: params.term
-                        }
-                    },
-                    processResults: function(data, page) {
-                        return {
-                            results: data
                         };
                     },
+                    processResults: function (response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
                 }
-            })
+
+            });
         });
     </script>
 @endpush

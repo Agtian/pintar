@@ -4,22 +4,27 @@ namespace App\Http\Controllers\SystemController;
 
 use App\Http\Controllers\Controller;
 use App\Models\PGSQL\MasterPegawai;
-use App\Models\TransPesertaDiklat;
 use Illuminate\Http\Request;
 
 class GetDataController extends Controller
 {
-    public function getSelectPegawais($search)
+    public function getSelectPegawais(Request $request)
     {
-        $query = MasterPegawai::where('nama_pegawai','LIKE','%'.$search.'%')->get();
+        $search = $request->search;
 
-        foreach ($query as $item) {
-            $data = [
-                'id'            => $item->pegawai_id,
-                'nama_pegawai'  => $item->nama_pegawai,
-            ];
+        if ($search == '') {
+            $query = MasterPegawai::orderBy('nama_pegawai', 'asc')->select('nama_pegawai', 'pegawai_id')->limit(20)->distinct()->get();
+        } else {
+            $query = MasterPegawai::orderBy('nama_pegawai', 'asc')->select('nama_pegawai', 'pegawai_id')->where('nama_pegawai','LIKE','%'.$search.'%')->limit(20)->distinct()->get();
         }
 
-        return json_encode($data);
+        $response = array();
+        foreach($query as $item){
+            $response[] = array(
+                'id'    => $item->pegawai_id,
+                'text'  => $item->nama_pegawai,
+            );
+        }
+        return response()->json($response); 
     }
 }
