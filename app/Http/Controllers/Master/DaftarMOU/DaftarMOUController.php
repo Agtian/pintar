@@ -25,6 +25,12 @@ class DaftarMOUController extends Controller
         return view('layouts.master.daftar-mou.update', compact('detail')); 
     }
 
+    public function akses($id)
+    {
+        $detail = MasterDaftarMOUDiklat::findOrFail(base64_decode($id));
+        return view('layouts.master.daftar-mou.akses', compact('detail')); 
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -56,6 +62,7 @@ class DaftarMOUController extends Controller
             'tgl_mulai_mou'     => $validatedData['tgl_mulai_mou'],
             'tgl_akhir_mou'     => $validatedData['tgl_akhir_mou'],
             'status_mou'        => 1,
+            'status_akses'      => 1,
         ]);
 
         return redirect('dashboard/admin/master-daftar-mou')
@@ -99,7 +106,6 @@ class DaftarMOUController extends Controller
         return redirect('dashboard/admin/master-daftar-mou')
                 ->with(['success' => 'Data MOU berhasil diperbarui.']);
     }
-
     public function destroy($id)
     {
         MasterDaftarMOUDiklat::findOrFail(base64_decode($id))->delete();

@@ -89,6 +89,7 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/master-daftar-mou', 'index');
         Route::get('/master-daftar-mou/create', 'create');
         Route::post('/master-daftar-mou', 'store');
+        Route::get('/master-daftar-mou/akses/{daftarmou}/edit', 'akses');
         Route::get('/master-daftar-mou/{daftarmou}/edit', 'edit');
         Route::put('/master-daftar-mou/{daftarmou}', 'update');
         Route::get('/master-daftar-mou/{daftarmou}/delete', 'destroy');

@@ -26,8 +26,8 @@
                 <h3 class="card-title">Tabel Data Daftar MOU</h3>
 
                 <div class="card-tools">
-                    <a href="{{ url('dashboard/admin/master-daftar-mou/create') }}"
-                        class="btn btn-sm btn-primary">Tambah MOU Diklat</a>
+                    <a href="{{ url('dashboard/admin/master-daftar-mou/create') }}" class="btn btn-sm btn-primary">Tambah
+                        MOU Diklat</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
@@ -64,24 +64,40 @@
                                     <td>{{ $item->bidang_kerjasama }}</td>
                                     <td>{{ $item->nama_instansi }}</td>
                                     <td>{{ $item->kota_instansi }}</td>
-                                    <td>{{ $item->jabatan_tdd_mou }} <br> {{ $item->nama_ttd_mou }} ({{ $item->nip_tdd_mou }})</td>
-                                    <td>{{ date('d F Y', strtotime($item->tgl_mulai_mou)) }}<br>s.d<br>{{ date('d F Y', strtotime($item->tgl_akhir_mou)) }}<br>({{ $item->jangka_waktu_tahun.' tahun' }})</td>
+                                    <td>{{ $item->jabatan_tdd_mou }} <br> {{ $item->nama_ttd_mou }}
+                                        ({{ $item->nip_tdd_mou }})
+                                    </td>
+                                    <td>{{ date('d F Y', strtotime($item->tgl_mulai_mou)) }}<br>s.d<br>{{ date('d F Y', strtotime($item->tgl_akhir_mou)) }}<br>({{ $item->jangka_waktu_tahun . ' tahun' }})
+                                    </td>
                                     <td align="center">
                                         @if ($item->status_mou == 1)
                                             <button class="btn btn-xs btn-success">Aktif</button>
                                         @else
                                             <button class="btn btn-xs btn-danger">Tidak Aktif</button>
                                         @endif
+
+
+                                        @if ($item->status_akses == 1)
+                                            <button class="btn btn-xs btn-success">Connected</button>
+                                        @else
+                                            <button class="btn btn-xs btn-danger">Disconnect</button>
+                                        @endif
                                     </td>
                                     <td align="center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-dark dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                            <button type="button" class="btn btn-dark dropdown-toggle dropdown-icon"
+                                                data-toggle="dropdown">
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu">
-                                                <a href="{{ url('dashboard/admin/master-daftar-mou/' . base64_encode($item->id) . '/edit') }}" class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Edit data"><i
-                                                        class="fas fa-edit"></i> Edit</a>
-                                                <a href="{{ url('dashboard/admin/master-daftar-mou/' . base64_encode($item->id) . '/delete') }}" class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
+                                                <a href="{{ url('dashboard/admin/master-daftar-mou/akses/' . base64_encode($item->id) . '/edit') }}"
+                                                    class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
+                                                    title="Edit data"><i class="fas fa-sync"></i> Akses System</a>
+                                                <a href="{{ url('dashboard/admin/master-daftar-mou/' . base64_encode($item->id) . '/edit') }}"
+                                                    class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
+                                                    title="Edit data"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="{{ url('dashboard/admin/master-daftar-mou/' . base64_encode($item->id) . '/delete') }}"
+                                                    class="dropdown-item" data-toggle="tooltip" data-placement="bottom"
                                                     title="Hapus data"><i class="far fa-trash-alt"></i> Hapus</a>
                                             </div>
                                         </div>
