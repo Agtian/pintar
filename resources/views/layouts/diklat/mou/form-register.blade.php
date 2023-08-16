@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Form Pendaftaran Diklat</h1>
+                    <h1 class="m-0">Form Pendaftaran</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Diklat</a></li>
-                        <li class="breadcrumb-item active">Form Pendaftaran Diklat</li>
+                        <li class="breadcrumb-item"><a href="#">Pendaftaran Diklat</a></li>
+                        <li class="breadcrumb-item active">Form Pendaftaran</li>
                     </ol>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     </button>
                 </div>
             </div>
-            <form action="{{ url('dashboard/admin/pendaftaran') }}" method="POST" enctype='multipart/form-data'>
+            <form action="{{ url('register-training') }}" method="POST" enctype='multipart/form-data'>
                 @csrf
                 @method('POST')
                 <div class="card-body p-2">
@@ -45,9 +45,6 @@
                                 <a class="nav-link active" id="vert-tabs-panduan-tab" data-toggle="pill"
                                     href="#vert-tabs-panduan" role="tab" aria-controls="vert-tabs-panduan"
                                     aria-selected="true">Panduan</a>
-                                <a class="nav-link" id="vert-tabs-daftar-mou-tab" data-toggle="pill"
-                                    href="#vert-tabs-daftar-mou" role="tab" aria-controls="vert-tabs-daftar-mou"
-                                    aria-selected="true">Daftar Peserta MOU</a>
                                 <a class="nav-link" id="vert-tabs-unggah-tab" data-toggle="pill" href="#vert-tabs-unggah"
                                     role="tab" aria-controls="vert-tabs-unggah" aria-selected="false">Unggah Surat
                                     Permohonan Diklat</a>
@@ -55,7 +52,8 @@
                                     role="tab" aria-controls="vert-tabs-rincian" aria-selected="false">Form Rincian
                                     Diklat</a>
                                 <a class="nav-link" id="vert-tabs-peserta-tab" data-toggle="pill" href="#vert-tabs-peserta"
-                                    role="tab" aria-controls="vert-tabs-peserta" aria-selected="false">Form Peserta
+                                    role="tab" aria-controls="vert-tabs-peserta" aria-selected="false">Form Biodata
+                                    Peserta
                                     Diklat</a>
                             </div>
                         </div>
@@ -73,57 +71,6 @@
                                     porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non
                                     consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus.
                                     Cras lacinia erat eget sapien porta consectetur.
-                                </div>
-                                <div class="tab-pane fade" id="vert-tabs-daftar-mou" role="tabpanel"
-                                    aria-labelledby="vert-tabs-daftar-mou-tab">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr class="bg-secondary">
-                                                    <th width="50"></th>
-                                                    <th width="50">NO</th>
-                                                    <th>INSTANSI</th>
-                                                    <th>BIDANG KERJA SAMA</th>
-                                                    <th>TANGGAL MOU</th>
-                                                    <th>STATUS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forelse ($resultDaftarMOU as $item)
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-radio">
-                                                                <input class="custom-control-input" type="radio"
-                                                                    id="customRadio{{ $item->id }}"
-                                                                    name="customRadioPilih"
-                                                                    value="{{ base64_encode($item->id) }}">
-                                                                <label for="customRadio{{ $item->id }}"
-                                                                    class="custom-control-label">Pilih</label>
-                                                            </div>
-                                                        </td>
-                                                        <td>{{ $loop->iteration + $resultDaftarMOU->firstItem() - 1 }}</td>
-                                                        <td>{{ $item->nama_instansi }}</td>
-                                                        <td>{{ $item->bidang_kerjasama }}</td>
-                                                        <td>{{ $item->tgl_mulai_mou . ' s.d ' . $item->tgl_akhir_mou }}</td>
-                                                        <td>
-                                                            @if ($item->status_mou == 1)
-                                                                <button class="btn btn-xs btn-success">Aktif</button>
-                                                            @else
-                                                                <button class="btn btn-xs btn-danger">Tidak Aktif</button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="6" align="center">Daftar MOU tidak tersedia !</td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
-                                        <div>
-                                            {{ $resultDaftarMOU->links() }}
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="vert-tabs-unggah" role="tabpanel"
                                     aria-labelledby="vert-tabs-unggah-tab">
@@ -186,6 +133,21 @@
                                             <h3 class="card-title">Form Rincian Diklat</h3>
                                         </div>
                                         <div class="card-body">
+                                            <div class="callout callout-info">
+                                                <h5>Informasi</h5>
+                                                <p>
+                                                <ul>
+                                                    <li>Isi form rincian diklat ini sesuai dengan karakteristik dan
+                                                        kebutuhan pengajuan diklat dari institusi pendidikan.</li>
+                                                    <li>Pada kolom <b>Lama Waktu Kegiatan</b> satuan nilainya ada pada atas
+                                                        kolom ini (kolom satuan waktu kegiatan).</li>
+                                                    <li>Pada kolom <b>Tanggal Diklat</b>, diisi dengan tanggal mulai
+                                                        pelaksanaan kegiatan dan tanggal akhir pelaksaan kegiatan</li>
+                                                    <li>Pada kolom <b>Jumlah Peserta</b>, diisi dengan jumlah peserta siswa
+                                                        yang akan mengikuti diklat.</li>
+                                                </ul>
+                                                </p>
+                                            </div>
                                             <div class="form-group row">
                                                 <label for="unit_kerja_id" class="col-sm-3 col-form-label">Unit Kerja
                                                     Diklat</label>
@@ -227,11 +189,11 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label for="satuan_kegiatan_id" class="col-sm-3 col-form-label">Satuan
-                                                    Kegiatan</label>
+                                                    Waktu Kegiatan</label>
                                                 <div class="col-sm-9">
                                                     <select name="satuan_kegiatan_id" id="satuan_kegiatan_id"
                                                         class="form-control @error('satuan_kegiatan_id') is-invalid @enderror">
-                                                        <option value="">-- Pilih Satuan Kegiatan --</option>
+                                                        <option value="">-- Pilih Satuan Waktu Kegiatan --</option>
                                                     </select>
                                                     @error('satuan_kegiatan_id')
                                                         <span class="invalid-feedback" role="alert">
@@ -319,6 +281,18 @@
                                             <h3 class="card-title">Form Tambahan Peserta Kompetensi Dasar & Kredensial</h3>
                                         </div>
                                         <div class="card-body">
+                                            <div class="callout callout-info">
+                                                <h5>Informasi</h5>
+                                                <p>
+                                                <ul>
+                                                    <li>Kompetensi Dasar & Kredensial wajib diikuti oleh calon siswa diklat
+                                                        dan pendidik klinis institusi pendidikan</li>
+                                                    <li>Pada kolom <b>Jumlah Peserta Tambahan</b>, diisi dengan jumlah calon
+                                                        siswa diklat ditambah dengan jumlah pendidik klinis institusi
+                                                        pendidikan.</li>
+                                                </ul>
+                                                </p>
+                                            </div>
                                             <div class="form-group row">
                                                 <label for="jumlah_peserta_tambahan"
                                                     class="col-sm-3 col-form-label">Jumlah Peserta Tambahan</label>
@@ -360,23 +334,22 @@
                                     <div class="col-12">
                                         <div class="card card-outline card-secondary">
                                             <div class="card-header">
-                                                <div class="card-title">Form Peserta Diklat</div>
+                                                <div class="card-title">Form Biodata Peserta Diklat</div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="position-relative p-3 bg-gray" style="height: 180px">
-                                                            <div class="ribbon-wrapper ribbon-xl">
-                                                                <div class="ribbon bg-warning text-md">INFORMASI</div>
-                                                            </div>
-                                                            <h4>PANDUAN PENGISIAN FORM</h4>
+                                                            <h5>PANDUAN PENGISIAN FORM</h5>
                                                             <ul>
-                                                                <li>Isi kolom jumlah peserta dengan variabel angka.</li>
-                                                                <li>Tombol <button class="btn btn-xs btn-info">Tampilkan
-                                                                        Form Biodata</button> : untuk menampilkan form isian
+                                                                <li>Pada kolom <b>Jumlah Peserta</b>, diisi total dari
+                                                                    jumlah siswa calon peserta diklat dan jumlah pendidik
+                                                                    klinis (isi dengan karakter angka).</li>
+                                                                <li>Tombol <a class="btn btn-xs btn-info">Tampilkan
+                                                                        Form Biodata</a> : untuk menampilkan form isian
                                                                     biodata calon peserta.</li>
-                                                                <li>Tombol <button class="btn btn-xs btn-primary">Tambah
-                                                                        Form</button> : Untuk menambah form isian biodata
+                                                                <li>Tombol <a class="btn btn-xs btn-primary">Tambah
+                                                                        Form</a> : Untuk menambah form isian biodata
                                                                     calon peserta jika peserta lebih dari satu.</li>
                                                             </ul>
                                                         </div>
@@ -385,13 +358,14 @@
                                                     <div class="col-12 mt-5">
                                                         <div class="form-group row">
                                                             <label for="jumlah_peserta"
-                                                                class="col-sm-3 col-form-label">Jumlah Peserta</label>
+                                                                class="col-sm-3 col-form-label">Total Jumlah
+                                                                Peserta</label>
                                                             <div class="col-sm-9">
                                                                 <div class="input-group">
                                                                     <input type="number"
                                                                         class="form-control @error('jumlah_peserta') is-invalid @enderror"
                                                                         id="jumlah_peserta" name="jumlah_peserta"
-                                                                        placeholder="Jumlah peserta" value="">
+                                                                        placeholder="Total jumlah peserta" value="">
                                                                     <span class="input-group-append">
                                                                         <button type="button" class="btn btn-info"
                                                                             id="tampilkanForm">Tampilkan Form

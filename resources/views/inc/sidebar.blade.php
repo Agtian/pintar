@@ -62,7 +62,8 @@
                 @if (Auth::user()->role_as == 1 || Auth::user()->role_as == 3)
                     <li class="nav-header">PENDAFTARAN DIKLAT</li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ url('register-training') }}" class="nav-link"
+                            {{ request()->is('/register-training') ? 'active bg-primary' : '' }}>
                             <i class="nav-icon fas fa-edit"></i>
                             <p class="text">Pendaftaran Peserta</p>
                         </a>
@@ -184,8 +185,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"
-                        onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="nav-icon fas fa-window-close"></i>
                         <p>
                             {{ __('Logout') }}

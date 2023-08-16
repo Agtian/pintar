@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BillingDiklat\PembayaranDiklatController;
 use App\Http\Controllers\BillingDiklat\RekapPendapatan;
 use App\Http\Controllers\Diklat\DaftarPesertaController;
+use App\Http\Controllers\Diklat\MOU\RegisterTrainingController;
 use App\Http\Controllers\Diklat\PendaftaranDiklatController;
 use App\Http\Controllers\Diklat\PendaftaranDiklatMOUController;
 use App\Http\Controllers\Diklat\SuratBalasanController;
@@ -51,6 +52,15 @@ Route::post('api/fetch-satuan-kegiatan-diklat', [DropdownController::class, 'get
 Route::post('api/fetch-jenis-praktikan-diklat', [DropdownController::class, 'getJenisPraktikan']);
 Route::get('api/fetch-table-peserta-diklat/{kode}/result', [DropdownController::class, 'getTablePesertaDiklat']);
 Route::GET('/api/fetch-get-pegawai', [GetDataController::class, 'getSelectPegawais']);
+
+Route::controller(RegisterTrainingController::class)->group(function () {
+    Route::get('/register-training', 'index');
+    Route::get('/register-training/create', 'create');
+    Route::post('/register-training', 'store');
+    Route::get('/register-training/{register}/edit', 'edit');
+    Route::put('/register-training/{register}', 'update');
+    Route::get('/register-training/{register}/delete', 'destroy');
+});
 
 Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(function () {
     // Route::controller(GetDataController::class)->group(function () {
