@@ -30,6 +30,7 @@
 
                 <form action="{{ route('confirmation-register') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="daftar_mou_diklat_id" value="{{ $daftar_mou_diklat_id }}">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                             value="{{ $email }}" readonly>

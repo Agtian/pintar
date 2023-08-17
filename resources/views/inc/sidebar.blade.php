@@ -34,7 +34,7 @@
                     </a>
                 </li>
 
-                @if (Auth::user()->role_as != 3 || Auth::user()->role_as != 4)
+                @if (Auth::user()->role_as == 1)
                     <li class="nav-header">PENDAFTARAN DIKLAT</li>
                     <li class="nav-item">
                         <a href="{{ url('dashboard/admin/pendaftaran-diklat') }}"
@@ -59,11 +59,12 @@
                     </li>
                 @endif
 
-                @if (Auth::user()->role_as == 1 || Auth::user()->role_as == 3)
+                @if (Auth::user()->role_as == 3)
                     <li class="nav-header">PENDAFTARAN DIKLAT</li>
                     <li class="nav-item">
-                        <a href="{{ url('register-training') }}" class="nav-link"
-                            {{ request()->is('/register-training') ? 'active bg-primary' : '' }}>
+                        <a href="{{ url('register-training') }}"
+                            class="nav-link
+                            {{ request()->is('register-training') ? 'active bg-primary' : '' }}">
                             <i class="nav-icon fas fa-edit"></i>
                             <p class="text">Pendaftaran Peserta</p>
                         </a>

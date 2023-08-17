@@ -62,7 +62,9 @@ Route::controller(RegisterTrainingController::class)->group(function () {
     Route::get('/register-training', 'index');
     Route::get('/register-training/create', 'create');
     Route::post('/register-training', 'store');
-    Route::get('/register-training/{register}/edit', 'edit');
+    Route::post('/register-training/kirim', 'kirimPermohonan');
+    Route::post('/register-training/batal', 'batalPermohonan');
+    Route::get('/register-training/{register}/resume', 'resume');
     Route::put('/register-training/{register}', 'update');
     Route::get('/register-training/{register}/delete', 'destroy');
 });

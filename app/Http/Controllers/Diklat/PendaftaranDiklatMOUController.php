@@ -88,7 +88,8 @@ class PendaftaranDiklatMOUController extends Controller
         }
     }
 
-    public function replaceAll($text) { 
+    public function replaceAll($text) 
+    { 
         $text = strtolower(htmlentities($text)); 
         $text = str_replace(get_html_translation_table(), "-", $text);
         $text = str_replace(" ", "_", $text);

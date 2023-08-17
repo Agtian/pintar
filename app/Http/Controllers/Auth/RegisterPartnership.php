@@ -37,6 +37,7 @@ class RegisterPartnership extends Controller
                     ->first();
         return view('auth.register-user', with([
             'email' => $cek->email,
+            'daftar_mou_diklat_id' => base64_encode($cek->id),
         ]));
     }
 
@@ -50,6 +51,7 @@ class RegisterPartnership extends Controller
         ]);
 
         User::create([
+            'daftar_mou_diklat_id' => base64_decode($request->daftar_mou_diklat_id),
             'email'         => $validatedData['email'],
             'name'          => $validatedData['name'],
             'no_hp'         => $validatedData['number_handphone'],
