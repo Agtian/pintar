@@ -18,6 +18,9 @@
 </head>
 
 <body class="hold-transition login-page">
+
+    @include('inc.alert')
+
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
@@ -88,7 +91,7 @@
                     @endif
                 </p>
                 <p class="mb-0">
-                    <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
+                    <a href="{{ url('/register') }}" class="text-center">Confirmation a new partnership</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

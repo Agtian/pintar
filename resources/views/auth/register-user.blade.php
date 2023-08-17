@@ -24,15 +24,15 @@
                 <a href="" class="h1"><b>Admin</b>PINTAR</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Confirmation a new partnership</p>
+                <p class="login-box-msg">Register a new user PIC</p>
 
                 @include('inc.alert')
 
-                <form action="{{ route('register-partnership') }}" method="POST">
+                <form action="{{ route('confirmation-register') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                            placeholder="Email person in charge (PIC)" value="{{ old('email') }}" autofocus>
+                            value="{{ $email }}" readonly>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -45,29 +45,64 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="kode_registrasi_akses"
-                            class="form-control @error('kode_registrasi_akses') is-invalid @enderror"
-                            placeholder="Kode register">
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                            placeholder="Name Person in charge (PIC)"autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-key"></span>
+                                <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        @error('kode_registrasi_akses')
+                        @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+                    <div class="input-group mb-3">
+                        <input type="number" name="number_handphone"
+                            class="form-control @error('number_handphone') is-invalid @enderror"
+                            placeholder="Handphone number (PIC) 08579900881">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-phone"></span>
+                            </div>
+                        </div>
+                        @error('number_handphone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="password_confirmation"
+                            placeholder="Retype password" autocomplete="new-password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
-                        <div class="col-7"></div>
-                        <div class="col-5">
-                            <button type="submit" class="btn btn-primary btn-block">Confirmation</button>
+                        <div class="col-8"></div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
                     </div>
                 </form>
-
-                <a href="{{ url('/login') }}" class="text-center">I already have a partnership</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->

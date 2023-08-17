@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\RegisterPartnership;
 use App\Http\Controllers\BillingDiklat\PembayaranDiklatController;
 use App\Http\Controllers\BillingDiklat\RekapPendapatan;
 use App\Http\Controllers\Diklat\DaftarPesertaController;
@@ -42,6 +43,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('/register-partnership', [RegisterPartnership::class, 'register'])->name('register-partnership');
+Route::get('/register-user/{kode}/confirm', [RegisterPartnership::class, 'index']);
+Route::post('/confirmation-register', [RegisterPartnership::class, 'confirmationRegister'])->name('confirmation-register');
+
 // Route::get('/dashboard/dashboard-v1', [App\Http\Controllers\Dashboard\DashboardV1::class, 'index'])->name('dashboard-v1');
 // Route::get('/dashboard/dashboard-v2', [App\Http\Controllers\Dashboard\DashboardV2::class, 'index'])->name('dashboard-v2');
 // Route::get('/dashboard/dashboard-v3', [App\Http\Controllers\Dashboard\DashboardV3::class, 'index'])->name('dashboard-v3');
@@ -51,7 +56,7 @@ Route::get('/home-dashboard', [HomeDashboard::class, 'index'])->name('home-dashb
 Route::post('api/fetch-satuan-kegiatan-diklat', [DropdownController::class, 'getSatuanKegiatan']);
 Route::post('api/fetch-jenis-praktikan-diklat', [DropdownController::class, 'getJenisPraktikan']);
 Route::get('api/fetch-table-peserta-diklat/{kode}/result', [DropdownController::class, 'getTablePesertaDiklat']);
-Route::GET('/api/fetch-get-pegawai', [GetDataController::class, 'getSelectPegawais']);
+Route::get('/api/fetch-get-pegawai', [GetDataController::class, 'getSelectPegawais']);
 
 Route::controller(RegisterTrainingController::class)->group(function () {
     Route::get('/register-training', 'index');

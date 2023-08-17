@@ -26,6 +26,10 @@ return new class extends Migration
             $table->date('tgl_mulai_mou');
             $table->date('tgl_akhir_mou');
             $table->tinyInteger('status_mou')->default('1')->comment('1=aktif,2=tidak_aktif');
+            $table->tinyInteger('status_akses')->default('1')->comment('1=connected,2=disconnect');
+            $table->string('email')->unique()->nullable();
+            $table->string('kode_registrasi_akses')->nullable();
+            $table->tinyInteger('status_kode_registrasi')->default('2')->comment('1=registered,2=not_register');
             $table->timestamps();
         });
     }

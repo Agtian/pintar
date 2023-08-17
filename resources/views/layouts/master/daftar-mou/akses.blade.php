@@ -184,6 +184,18 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input readonly type="email" class="form-control @error('email') is-invalid @enderror"
+                                id="email" name="email" value="{{ $detail->email }}">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer clearfix">
                     <button type="submit" class="btn btn-outline-primary float-right">Simpan</button>

@@ -31,6 +31,13 @@ class DaftarMOUController extends Controller
         return view('layouts.master.daftar-mou.akses', compact('detail')); 
     }
 
+    public function kodeRegistrasiDiklat($id)
+    {
+        $title  = "CARHZARDM";
+        $kode   = base64_encode($id);
+        return $title.$kode;
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -48,7 +55,7 @@ class DaftarMOUController extends Controller
             'tgl_akhir_mou'     => 'required|date',
         ]);
 
-        MasterDaftarMOUDiklat::create([
+        $insertMasterDaftarMOU = MasterDaftarMOUDiklat::create([
             'no_surat'          => $validatedData['no_surat'],
             'no_mou'            => '',
             'tgl_mou'           => $validatedData['tgl_mou'],
@@ -101,6 +108,7 @@ class DaftarMOUController extends Controller
             'tgl_mulai_mou'     => $validatedData['tgl_mulai_mou'],
             'tgl_akhir_mou'     => $validatedData['tgl_akhir_mou'],
             'status_mou'        => $validatedData['status_mou'],
+            'kode_registrasi_akses' => $this->kodeRegistrasiDiklat(base64_decode($id)),
         ]);
 
         return redirect('dashboard/admin/master-daftar-mou')
