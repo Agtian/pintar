@@ -291,11 +291,15 @@ class RegisterTrainingController extends Controller
     public function kirimPermohonan(Request $request)
     {
         $validatedData = $request->validate([
-            'id'  => 'required',
+            'pendaftaran_diklat_id'  => 'required',
         ]);
 
-        TransPendaftaranDiklat::findOrFail(base64_encode($validatedData['id']))->update([
+        TransPendaftaranDiklat::findOrFail(base64_decode($validatedData['pendaftaran_diklat_id']))->update([
             'status_pendaftaran'    => 1,
+        ]);
+
+        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_encode($validatedData['pendaftaran_diklat_id']))->update([
+            'f_status'  => 0,
         ]);
 
         return redirect('register-training')
@@ -305,11 +309,15 @@ class RegisterTrainingController extends Controller
     public function batalPermohonan(Request $request)
     {
         $validatedData = $request->validate([
-            'id'  => 'required',
+            'pendaftaran_diklat_id'  => 'required',
         ]);
         
-        TransPendaftaranDiklat::findOrFail(base64_encode($validatedData['id']))->update([
+        TransPendaftaranDiklat::findOrFail(base64_decode($validatedData['pendaftaran_diklat_id']))->update([
             'status_pendaftaran'    => 4,
+        ]);
+
+        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_encode($validatedData['pendaftaran_diklat_id']))->update([
+            'f_status'  => 2,
         ]);
 
         return redirect('register-training')

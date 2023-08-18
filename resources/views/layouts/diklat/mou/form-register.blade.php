@@ -398,9 +398,7 @@
                                                             <tr>
                                                                 <td width="10">-</td>
                                                                 <td align="left">Pada kolom <b>Jumlah Peserta</b>, diisi
-                                                                    total dari
-                                                                    jumlah siswa calon peserta diklat dan jumlah pendidik
-                                                                    klinis (isi dengan karakter angka).</td>
+                                                                    total jumlah seluruh calon peserta diklat RSUD dr. Rehatta.</td>
                                                             </tr>
                                                             <tr>
                                                                 <td width="10">-</td>

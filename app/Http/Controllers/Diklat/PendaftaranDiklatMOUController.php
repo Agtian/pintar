@@ -301,6 +301,10 @@ class PendaftaranDiklatMOUController extends Controller
             'status_pendaftaran'    => 1,
         ]);
 
+        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_encode($validatedData['pendaftaran_diklat_id']))->update([
+            'f_status'  => 0,
+        ]);
+
         return redirect('dashboard/admin/pendaftaran-diklat')
                 ->with(['success' => 'Permohonan diklat berhasil diajukan, harap tunggu 2x24 jam kami akan segera mengkonfirmasi permohonan anda. Terimakasih.']);
     }
@@ -313,6 +317,10 @@ class PendaftaranDiklatMOUController extends Controller
         
         TransPendaftaranDiklat::findOrFail(base64_encode($validatedData['id']))->update([
             'status_pendaftaran'    => 4,
+        ]);
+
+        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_encode($validatedData['id']))->update([
+            'f_status'  => 2,
         ]);
 
         return redirect('dashboard/admin/pendaftaran-diklat')

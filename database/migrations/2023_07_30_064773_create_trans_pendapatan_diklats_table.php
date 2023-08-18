@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tarif_diklat_id')->nullable();
             $table->unsignedBigInteger('honorarium_diklat_id')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->bigInteger('user_validated_id')->nullable();
             $table->bigInteger('jasa_sarana');
             $table->bigInteger('jasa_lainnya');
             $table->bigInteger('tarif_honorarium')->default('0');

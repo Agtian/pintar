@@ -127,7 +127,7 @@
                                                     {{ $detail['total_waktu'] . ' ' . $detail['alias'] }} <b>x</b>
                                                     {{ $detail['jumlah_peserta'] + $detail['jumlah_peserta_tambahan'] }}
                                                     Orang</td>
-                                                <td>Rp. {{ number_format($detail['total_tarif_praktik'], 2, ',', '.') }}
+                                                <td width="150">Rp. {{ number_format($detail['total_tarif_praktik'], 2, ',', '.') }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -159,13 +159,13 @@
                 </div>
             </div>
             <div class="card-footer">
-                <form action="url('register-training/kirim')" method="POST">
+                <form action="{{ url('register-training/kirim') }}" method="POST">
                     @csrf
                     <input type="hidden" name="pendaftaran_diklat_id"
                         value="{{ base64_encode($detail['pendaftaran_diklat_id']) }}">
                     <button type="submit" class="btn btn-primary float-right">Kirim Permohonan Diklat</button>
                 </form>
-                <form action="url('register-training/batal')" method="POST">
+                <form action="{{ url('register-training/batal') }}" method="POST">
                     @csrf
                     <input type="hidden" name="pendaftaran_diklat_id"
                         value="{{ base64_encode($detail['pendaftaran_diklat_id']) }}">

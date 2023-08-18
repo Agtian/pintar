@@ -11,9 +11,9 @@ h2{
     color: #0275d8;
 }
 #form {
-    text-align: center;
-    position: relative;
-    margin-top: 20px
+    /* text-align: center; */
+    /* position: relative; */
+    /* margin-top: 20px */
 }
   
 #form fieldset {
@@ -28,7 +28,7 @@ h2{
 }
   
 .finish {
-    text-align: center
+    /* text-align: center */
 }
   
 #form fieldset:not(:first-of-type) {
