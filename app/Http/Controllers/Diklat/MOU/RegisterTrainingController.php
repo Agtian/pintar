@@ -224,6 +224,7 @@ class RegisterTrainingController extends Controller
         $insertPendaftaranDiklat = TransPendaftaranDiklat::create([
             'user_id'           => Auth::user()->id,
             'surat_diklat_id'   => $insertSuratDiklat['id'],
+            'daftar_mou_diklat_id' => Auth::user()->daftar_mou_diklat_id,
             'kode_pendaftaran'  => $this->getAutoKode(),
             'jumlah_peserta'    => $validatedData['jumlah_peserta'],
             'jumlah_peserta_tambahan' => $validatedData['jumlah_peserta_tambahan'],

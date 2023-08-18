@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('surat_diklat_id')->nullable();
             $table->unsignedBigInteger('acara_diklat_id')->nullable();
+            $table->bigInteger('daftar_mou_diklat_id')->nullable();
             $table->string('kode_pendaftaran', 100);
             $table->integer('jumlah_peserta');
             $table->integer('jumlah_peserta_tambahan')->default(0);

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterPartnership;
 use App\Http\Controllers\BillingDiklat\PembayaranDiklatController;
 use App\Http\Controllers\BillingDiklat\RekapPendapatan;
 use App\Http\Controllers\Diklat\DaftarPesertaController;
+use App\Http\Controllers\Diklat\MOU\DataPendaftaranController;
 use App\Http\Controllers\Diklat\MOU\RegisterTrainingController;
 use App\Http\Controllers\Diklat\PendaftaranDiklatController;
 use App\Http\Controllers\Diklat\PendaftaranDiklatMOUController;
@@ -67,6 +68,15 @@ Route::controller(RegisterTrainingController::class)->group(function () {
     Route::get('/register-training/{register}/resume', 'resume');
     Route::put('/register-training/{register}', 'update');
     Route::get('/register-training/{register}/delete', 'destroy');
+});
+
+Route::controller(DataPendaftaranController::class)->group(function () {
+    Route::get('/data-pendaftaran', 'index');
+    Route::get('/data-pendaftaran/create', 'create');
+    Route::post('/data-pendaftaran', 'store');
+    Route::get('/data-pendaftaran/{kode}/edit', 'edit');
+    Route::put('/data-pendaftaran/{kode}', 'update');
+    Route::get('/data-pendaftaran/{kode}/delete', 'destroy');
 });
 
 Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(function () {

@@ -70,9 +70,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ url('data-pendaftaran') }}" class="nav-link {{ request()->is('data-pendaftaran') ? 'active bg-primary' : '' }}">
                             <i class="nav-icon fas fa-chalkboard-teacher"></i>
-                            <p class="text">Daftar Peserta</p>
+                            <p class="text">Data Pendaftaran</p>
                         </a>
                     </li>
                 @endif
