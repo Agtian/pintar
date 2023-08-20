@@ -47,10 +47,10 @@
                                 <th>TGL KEGIATAN</th>
                                 <th>NAMA PESERTA</th>
                                 <th>SURAT PERMOHONAN</th>
-                                <th>RINCIAN BIAYA</th>
+                                <th width="250">RINCIAN BIAYA</th>
                                 <th>JUMLAH BIAYA</th>
                                 <th>TOTAL BIAYA</th>
-                                <th width="180">
+                                <th>
                                     <center>AKSI</center>
                                 </th>
                             </tr>
@@ -73,29 +73,44 @@
                                             <button class="btn btn-danger btn-sm btn-block">Batal</button>
                                         @endif
                                     </td>
-                                    <td>{{ date('d/m/Y', strtotime($item->tgl_mulai)) }} <br> s.d <br> {{ date('d/m/Y', strtotime($item->tgl_akhir)) }} <br> ({{ $item->total_waktu.' '.$item->alias }})</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-default">Tampilkan Peserta Diklat</button><br>
-                                        <button type="button" class="btn btn-sm btn-default mt-1">Tampilkan Peserta Pendidik Klinis</button>
+                                    <td>{{ date('d/m/Y', strtotime($item->tgl_mulai)) }} <br> s.d <br>
+                                        {{ date('d/m/Y', strtotime($item->tgl_akhir)) }} <br>
+                                        ({{ $item->total_waktu . ' ' . $item->alias }})
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-default">Tampilkan Surat Permohonan</button><br>
+                                        <button type="button" class="btn btn-sm btn-default">Tampilkan Peserta
+                                            Diklat</button><br>
+                                        <button type="button" class="btn btn-sm btn-default mt-1">Tampilkan Peserta
+                                            Pendidik Klinis</button>
                                     </td>
                                     <td>
-                                        Biaya {{ $item->nama_kegiatan.' '.$item->jenis_praktikan }} (Per {{ $item->alias }}) Rp. {{ number_format($item->jumlah, 2, ',', '.') }} <b>x</b> {{ $item->total_waktu.' '.$item->alias }} <b>x</b> {{ $item->jumlah_peserta }} Org 
+                                        <button type="button" class="btn btn-sm btn-default">Tampilkan Surat
+                                            Permohonan</button><br>
+                                    </td>
+                                    <td>
+                                        Biaya {{ $item->nama_kegiatan . ' ' . $item->jenis_praktikan }} (Per
+                                        {{ $item->alias }}) Rp. {{ number_format($item->jumlah, 2, ',', '.') }} <b>x</b>
+                                        {{ $item->total_waktu . ' ' . $item->alias }} <b>x</b> {{ $item->jumlah_peserta }}
+                                        Org
                                         <hr>
-                                        Biaya pelatihan kompetensi dasar & kredensial Rp. {{ number_format($item->tarif_pre_klinik, 2, ',', '.') }} <b>x</b> {{ $item->jumlah_peserta_tambahan }} Org
+                                        Biaya pelatihan kompetensi dasar & kredensial Rp.
+                                        {{ number_format($item->tarif_pre_klinik, 2, ',', '.') }} <b>x</b>
+                                        {{ $item->jumlah_peserta_tambahan }} Org
                                     </td>
                                     <td>
-                                        Rp. {{ number_format(($item->jumlah * $item->total_waktu * $item->jumlah_peserta), 2, ',', '.') }}
+                                        Rp.
+                                        {{ number_format($item->jumlah * $item->total_waktu * $item->jumlah_peserta, 2, ',', '.') }}
                                         <hr>
-                                        Rp. {{ number_format(($item->tarif_pre_klinik * $item->jumlah_peserta_tambahan), 2, ',', '.') }}
+                                        Rp.
+                                        {{ number_format($item->tarif_pre_klinik * $item->jumlah_peserta_tambahan, 2, ',', '.') }}
                                     </td>
                                     <td>
-                                        Rp. {{ number_format(($item->jumlah * $item->total_waktu * $item->jumlah_peserta) + ($item->tarif_pre_klinik * $item->jumlah_peserta_tambahan) , 2, ',', '.') }}
+                                        Rp.
+                                        {{ number_format($item->jumlah * $item->total_waktu * $item->jumlah_peserta + $item->tarif_pre_klinik * $item->jumlah_peserta_tambahan, 2, ',', '.') }}
                                     </td>
                                     <td align="center">
-                                        <button type="button" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Konfirmasi</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary"><i
+                                                class="fas fa-edit"></i> Konfirmasi</button>
                                     </td>
                                 </tr>
                             @empty
