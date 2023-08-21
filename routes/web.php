@@ -74,6 +74,7 @@ Route::controller(DataPendaftaranController::class)->group(function () {
     Route::get('/data-pendaftaran', 'index');
     Route::get('/data-pendaftaran/create', 'create');
     Route::post('/data-pendaftaran', 'store');
+    Route::get('/data-pendaftaran/printout/{kode}/view', 'getSuratPermohonan');
     Route::get('/data-pendaftaran/{kode}/edit', 'edit');
     Route::put('/data-pendaftaran/{kode}', 'update');
     Route::get('/data-pendaftaran/{kode}/delete', 'destroy');

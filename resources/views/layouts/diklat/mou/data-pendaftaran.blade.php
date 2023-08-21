@@ -78,14 +78,10 @@
                                         ({{ $item->total_waktu . ' ' . $item->alias }})
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-default">Tampilkan Peserta
-                                            Diklat</button><br>
-                                        <button type="button" class="btn btn-sm btn-default mt-1">Tampilkan Peserta
-                                            Pendidik Klinis</button>
+                                        @livewire('diklat.mou.modal-tampilkan-peserta', ['pendaftaran_diklat_id' => $item->pendaftaran_diklat_id ])
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-default">Tampilkan Surat
-                                            Permohonan</button><br>
+                                        <a href="{{ url('data-pendaftaran/printout/'.base64_encode($item->pendaftaran_diklat_id).'/view') }}" target="_blank" class="btn btn-sm btn-default">Tampilkan Surat Permohonan</a><br>
                                     </td>
                                     <td>
                                         Biaya {{ $item->nama_kegiatan . ' ' . $item->jenis_praktikan }} (Per
@@ -109,8 +105,7 @@
                                         {{ number_format($item->jumlah * $item->total_waktu * $item->jumlah_peserta + $item->tarif_pre_klinik * $item->jumlah_peserta_tambahan, 2, ',', '.') }}
                                     </td>
                                     <td align="center">
-                                        <button type="button" class="btn btn-sm btn-outline-primary"><i
-                                                class="fas fa-edit"></i> Konfirmasi</button>
+                                        <a href="{{ url('data-pendaftaran/'.base64_encode($item->pendaftaran_diklat_id).'/edit') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Ubah Permohonan</a>
                                     </td>
                                 </tr>
                             @empty
