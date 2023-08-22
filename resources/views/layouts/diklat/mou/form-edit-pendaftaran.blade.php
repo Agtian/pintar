@@ -27,8 +27,6 @@
                 <h3 class="card-title">Tabel Data Pendaftaran</h3>
 
                 <div class="card-tools">
-                    <a href="{{ url('dashboard/admin/master-unit-kerja/create') }}" class="btn btn-sm btn-primary">Tambah
-                        Unit Kerja</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
@@ -113,7 +111,9 @@
                 </div>
 
                 
-                <form action="{{ url('register-training') }}" method="POST"  enctype='multipart/form-data'>
+                <form action="{{ url('data-pendaftaran/'.base64_encode($detail->pendaftaran_diklat_id)) }}" method="POST"  enctype='multipart/form-data'>
+                    @method('PUT')
+                    @csrf
                     <div class="row p-2">
                         <div class="col-md-12">
                             <div class="card card-outline card-dark">
@@ -138,7 +138,7 @@
                                             <input type="date"
                                                 class="form-control @error('tgl_surat_diklat') is-invalid @enderror"
                                                 id="tgl_surat_diklat" name="tgl_surat_diklat"
-                                                value="{{ old('tgl_surat_diklat') }}">
+                                                value="{{ $detail->tgl_surat_diklat }}">
                                             @error('tgl_surat_diklat')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -154,7 +154,7 @@
                                                 class="form-control @error('no_surat_diklat') is-invalid @enderror"
                                                 id="no_surat_diklat" name="no_surat_diklat"
                                                 placeholder="Nomor surat permohonan diklat"
-                                                value="{{ old('no_surat_diklat') }}">
+                                                value="{{ $detail->no_surat_diklat }}">
                                             @error('no_surat_diklat')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -223,8 +223,7 @@
                                                 class="form-control @error('unit_kerja_id') is-invalid @enderror">
                                                 <option value="">-- Pilih Unit Kerja --</option>
                                                 @foreach ($resultUnitKerja as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->unit_kerja }}
-                                                    </option>
+                                                    <option value="{{ $item->id }}">{{ $item->unit_kerja }}</option>
                                                 @endforeach
                                             </select>
                                             @error('unit_kerja_id')
@@ -285,13 +284,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="tgl_awal" class="col-sm-3 col-form-label">Tanggal
+                                        <label for="tgl_mulai" class="col-sm-3 col-form-label">Tanggal
                                             Diklat</label>
                                         <div class="col-sm-4">
                                             <input type="date"
-                                                class="form-control @error('tgl_awal') is-invalid @enderror"
-                                                id="tgl_awal" name="tgl_awal" value="{{ old('tgl_awal') }}">
-                                            @error('tgl_awal')
+                                                class="form-control @error('tgl_mulai') is-invalid @enderror"
+                                                id="tgl_mulai" name="tgl_mulai" value="{{ $detail->tgl_mulai }}">
+                                            @error('tgl_mulai')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -301,7 +300,7 @@
                                         <div class="col-sm-4">
                                             <input type="date"
                                                 class="form-control @error('tgl_akhir') is-invalid @enderror"
-                                                id="tgl_akhir" name="tgl_akhir" value="{{ old('tgl_akhir') }}">
+                                                id="tgl_akhir" name="tgl_akhir" value="{{ $detail->tgl_akhir }}">
                                             @error('tgl_akhir')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -332,7 +331,7 @@
                                             <input type="number"
                                                 class="form-control @error('jumlah_peserta') is-invalid @enderror"
                                                 id="jumlah_peserta" name="jumlah_peserta"
-                                                placeholder="Jumlah Peserta" value="{{ old('jumlah_peserta') }}">
+                                                placeholder="Jumlah Peserta" value="{{ $detail->jumlah_peserta }}">
                                             @error('jumlah_peserta')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -375,7 +374,7 @@
                                                 class="form-control @error('jumlah_peserta_tambahan') is-invalid @enderror"
                                                 id="jumlah_peserta_tambahan" name="jumlah_peserta_tambahan"
                                                 placeholder="Jumlah perserta tambahan"
-                                                value="{{ old('jumlah_peserta_tambahan') }}">
+                                                value="{{ $detail->jumlah_peserta_tambahan }}">
                                             @error('jumlah_peserta_tambahan')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -400,6 +399,13 @@
                         </div>
                         <div class="col-md-12">
                             @livewire('diklat.mou.form-edit-tabel-data-peserta', ['pendaftaran_diklat_id' => request()->segment(2)])
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card card-outline card-dark">
+                                <div class="card-body">
+                                    <button type="submit" class="btn btn-md btn-primary">Simpan Perubahan</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>

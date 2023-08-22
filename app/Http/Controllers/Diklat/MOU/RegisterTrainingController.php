@@ -299,7 +299,7 @@ class RegisterTrainingController extends Controller
             'status_pendaftaran'    => 1,
         ]);
 
-        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_encode($validatedData['pendaftaran_diklat_id']))->update([
+        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_decode($validatedData['pendaftaran_diklat_id']))->update([
             'f_status'  => 0,
         ]);
 
@@ -317,7 +317,7 @@ class RegisterTrainingController extends Controller
             'status_pendaftaran'    => 4,
         ]);
 
-        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_encode($validatedData['pendaftaran_diklat_id']))->update([
+        TransPendapatanDiklat::where('pendaftaran_diklat_id', base64_decode($validatedData['pendaftaran_diklat_id']))->update([
             'f_status'  => 2,
         ]);
 
