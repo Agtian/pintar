@@ -253,7 +253,7 @@ Route::prefix('dashboard/admin')->middleware(['auth', 'isAdmin'])->group(functio
         Route::get('/printout-diklat/{kode}/edit', 'edit');
         Route::put('/printout-diklat/{kode}', 'update');
         Route::get('/printout-diklat/{kode}/delete', 'destroy');
-        
+
         Route::get('/printout-diklat/surat-balasan/{kode}/pdf', 'suratBalasan');
         Route::get('/printout-diklat/surat-balasan-i/{kode}/pdf', 'suratBalasanV1');
     });
