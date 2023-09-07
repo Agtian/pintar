@@ -20,11 +20,13 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('role_as')->default('0')->comment('0=petugas_diklat,1=admin,2=kasir,3=peserta_mou,4=peserta_diklat');
+            $table->unsignedBigInteger('role_id');
             $table->tinyInteger('status_user')->default('0')->comment('0=tidak_aktif,1=aktif');
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('pegawai_id')->references('id')->on('m_pegawai_temp')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('m_roles')->onDelete('cascade');
         });
     }
 

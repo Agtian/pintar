@@ -4,6 +4,11 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\RegisterPartnership;
 use App\Http\Controllers\BillingDiklat\PembayaranDiklatController;
 use App\Http\Controllers\BillingDiklat\RekapPendapatan;
+use App\Http\Controllers\Dashboard\DashboardAdmin;
+use App\Http\Controllers\Dashboard\DashboardInstansi;
+use App\Http\Controllers\Dashboard\DashboardKasir;
+use App\Http\Controllers\Dashboard\DashboardPesertaDiklat;
+use App\Http\Controllers\Dashboard\DashboardPetugasDiklat;
 use App\Http\Controllers\Diklat\DaftarPesertaController;
 use App\Http\Controllers\Diklat\MOU\DataPendaftaranController;
 use App\Http\Controllers\Diklat\MOU\RegisterTrainingController;
@@ -23,8 +28,10 @@ use App\Http\Controllers\Master\TarifPelatihanPreKlinik\TarifPelatihanPreKlinikC
 use App\Http\Controllers\Master\UnitKerja\UnitKerjaController;
 use App\Http\Controllers\Output\PrintOut\PdfDiklatController;
 use App\Http\Controllers\Pelatihan\PendaftaranPelatihanController;
+use App\Http\Controllers\SystemController\AuthController;
 use App\Http\Controllers\SystemController\DropdownController;
 use App\Http\Controllers\SystemController\GetDataController;
+use App\Http\Controllers\SystemController\RedirectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,9 +45,59 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Jika user belum login
+Route::group(['middleware' => 'guest'], function() {
+    Route::get('/', [AuthController::class, 'login'])->name('login');
+    Route::get('/dashboard', [AuthController::class, 'login'])->name('login');
+    Route::post('/login-app', [AuthController::class, 'dologin'])->name('dologin');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
-Auth::routes();
+// Route::get('/redirect', [RedirectController::class, 'cek']);
+
+// Jika user petugas diklat
+Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [DashboardPetugasDiklat::class, 'index']);
+});
+
+// Jika user admin
+Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [DashboardAdmin::class, 'index']);
+});
+
+// Jika user kasir
+Route::group(['middleware' => ['auth', 'checkrole:3']], function() {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [DashboardKasir::class, 'index']);
+});
+
+// Jika user peserta mou
+Route::group(['middleware' => ['auth', 'checkrole:4']], function() {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [DashboardInstansi::class, 'index']);
+});
+
+
+// Jika user peserta diklat
+Route::group(['middleware' => ['auth', 'checkrole:5']], function() {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [DashboardPesertaDiklat::class, 'index']);
+});
+
+
+
+
+
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

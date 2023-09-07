@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\MasterRole;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +21,27 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        MasterRole::create([
+            'role_name' => 'pertugas_diklat',
+        ]);
+
+        MasterRole::create([
+            'role_name' => 'admin',
+        ]);
+
+        MasterRole::create([
+            'role_name' => 'kasir',
+        ]);
+
+        MasterRole::create([
+            'role_name' => 'peserta_mou',
+        ]);
+
+        MasterRole::create([
+            'role_name' => 'peserta_diklat',
+        ]);
+
+        User::factory(5)->create();
     }
 }

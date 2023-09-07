@@ -30,7 +30,7 @@
 
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('dologin') }}" method="POST">
                     @csrf
 
                     <div class="input-group mb-3">
