@@ -23,35 +23,35 @@ class AuthController extends Controller
             // buat ulang session login
             $request->session()->regenerate();
 
-            if (auth()->user()->role_id === 1) {
+            if (auth()->user()->role_id == 1) {
                 // jika user petugas_diklat
-                return redirect()->intended('/dashboard');
+                return redirect('/dashboard');
 
-            } elseif (auth()->user()->role_id === 2) {
+            } elseif (auth()->user()->role_id == 2) {
                 // jika user admin
                 return redirect()->intended('/administrator/dashboard');
 
-            } elseif (auth()->user()->role_id === 3) {
+            } elseif (auth()->user()->role_id == 3) {
                 // jika user kasir
                 return redirect()->intended('/dashboard-cashier');
 
-            } elseif (auth()->user()->role_id === 4) {
+            } elseif (auth()->user()->role_id == 4) {
                 // jika user peserta_mou
                 return redirect()->intended('/dashboard-institutions');
 
-            } elseif (auth()->user()->role_id === 5) {
+            } elseif (auth()->user()->role_id == 5) {
                 // jika user peserta_diklat
                 return redirect()->intended('/administrator/dashboard');
 
             } else {
                 // jika tidak ada akses
-                return back()->with('error', 'anda tidak memiliki akses.');
+                return back()->with('warning', 'anda tidak memiliki akses.');
             }
         }
 
         // jika email atau password salah
         // kirimkan session error
-        return back()->with('error', 'email atau password salah');
+        return back()->with('warning', 'email atau password salah');
     }
 
     public function logout(Request $request) {
